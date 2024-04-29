@@ -1,0 +1,132 @@
+:root {
+	--header-height: 64px;
+	--footer-height: 64px;
+	--borders-color: rgb(210, 210, 215);
+	--menu-text-color: rgb(100, 100, 100);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: system-ui, sans-serif;
+}
+
+div.centered {
+	width: 40%;
+	min-width: 768px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+#header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	border-bottom: 1px solid var(--borders-color);
+	background-color: #FFFF;
+}
+
+#header >.centered {
+	display: flex;
+	align-items: center;
+}
+
+#header >.centered >div {
+	flex: 1;
+}
+
+#header >.centered >div:last-child {
+	text-align: right;
+}
+
+#title {
+	font-size: 1.2em;
+}
+
+#title::before {
+	content: "\1f4bb";
+}
+
+#title::after {
+	content: "beta";
+	font-size: 0.6em;
+	position: relative;
+	top: 0.5em;
+}
+
+#title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+#part {
+	color: grey;
+}
+
+#wrapper {
+	display: flex;
+	min-height: calc(100vh - var(--header-height) - var(--footer-height));
+	padding: 0;
+}
+
+#wrapper >#menu {
+	flex: 0 0 150px;
+	border-right: 1px solid var(--borders-color);
+	padding: 40px 0;
+	font-size: 0.9em;
+	color: var(--menu-text-color);
+}
+
+#wrapper >#main {
+	flex: 1;
+	padding: 40px 30px;
+}
+
+#menu >.sticky {
+	position: sticky;
+	top: calc(var(--header-height) + 40px);
+}
+
+#menu h1 {
+	padding-left: 20px;
+	font-size: 0.9em;
+}
+
+/* Override dello styling predefinito per le liste non ordinate */
+#menu ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#menu li {
+	border-left: 3px solid rgb(180, 180, 180);
+	background-color: rgb(240, 240, 240);
+}
+
+#menu li:hover {
+	border-left-color: rgb(160, 160, 160);
+	background-color: rgb(220, 220, 220);
+}
+
+/* Override dello styling predefinito per i collegamenti */
+#menu li >a {
+	display: block;
+	padding: 10px 20px;
+	color: inherit;
+	text-decoration: none;
+}
+
+#main > *:first-child {
+	margin-top: 0;
+}
+
+#footer {
+	z-index: 100;
+	min-height: 64px;
+	background-color: rgb(240, 240, 240);
+	color: var(--menu-text-color);
+}

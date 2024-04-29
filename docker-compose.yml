@@ -1,0 +1,12 @@
+services:
+  httpd:
+    image: httpd-cgid
+    build: .
+    container_name: apache-homework1
+    volumes:
+      #- ./config/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+      - ./html:/usr/local/apache2/htdocs
+      - ./cgi-bin:/usr/local/apache2/cgi-bin
+
+    ports:
+      - 8080:80
