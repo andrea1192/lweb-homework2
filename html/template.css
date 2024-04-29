@@ -124,6 +124,29 @@ div.centered {
 	margin-top: 0;
 }
 
+#main pre {
+	margin-left: 30px;
+}
+
+#main p code {
+	background-color: rgb(240, 240, 240);
+	font-size: 1.1em;
+}
+
+#main div.note {
+	background-color: rgb(255, 240, 240);
+	border: 1px solid red;
+	padding: 10px;
+}
+
+#main div.note >p:first-child {
+	margin-top: 0;
+}
+
+#main div.note >p:last-child {
+	margin-bottom: 0;
+}
+
 #footer {
 	z-index: 100;
 	min-height: 64px;

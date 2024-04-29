@@ -1,0 +1,47 @@
+<h1>Selettori</h1>
+
+<p>Per determinare gli elementi della pagina HTML ai quali applicare lo stile,
+CSS fa uso dei <em>selettori</em>, pattern di caratteri che possono
+identificare gli elementi a partire da diverse propriet&agrave;:</p>
+
+<h2>Tipo, classe e ID</h2>
+
+<p>Le regole possono essere applicate a tutti gli elementi di un determinato
+tipo:</p>
+
+<pre><code>strong</code></pre>
+
+<p>Per selezionare gli elementi che appartengono ad una classe,
+l'operatore &egrave; <code>.</code>:</p>
+
+<pre><code>#wrapper</code></pre>
+
+<p>Per selezionare l'elemento che possiede un certo ID, si utilizza l'operatore
+<code>#</code>:</p>
+
+<pre><code>.centered</code></pre>
+
+<h2>Discendenza</h2>
+
+<p>Due selettori separati da uno spazio indicano che la regola si applica a
+tutti gli elementi selezionati dal secondo che siano discendenti di un elemento
+selezionato dal primo:</p>
+
+<pre><code>ul li</code></pre>
+
+<p>Se il separatore &egrave; &gt;, si ricercano i discendenti diretti
+(figli): </p>
+
+<pre><code>ul &gt; li</code></pre>
+
+<h2>Stato e presentazione</h2>
+
+<p>Le <strong>pseudo-classi</strong> consentono una selezione basata
+sull'occorrenza di uno stato, ad esempio l'elemento correntemente sotto al
+puntatore oppure un collegamento ipertestuale gi&egrave; visitato.</p>
+
+<p>Gli <strong>pseudo-elementi</strong> permettono invece di selezionare
+<em>parte</em> del contenuto di un elemento esistente, basandosi su condizioni
+che possono essere verificate soltanto al momento della presentazione. Un
+esempio &egrave; la prima riga di un paragrafo, che pu&ograve; dipendere dalla
+dimensione della finestra del client. </p>
