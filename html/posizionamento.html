@@ -1,0 +1,65 @@
+<h1>Posizionamento</h1>
+
+<p>Con la propriet&agrave; <code>position</code> &egrave; possibile alterare la
+posizione predefinita che un box assumerebbe nella pagina, aggiungendo degli
+offset relativi ad essa oppure ad altre parti del documento.</p>
+
+<h2><code>position: relative</code></h2>
+
+<p>Con <code>relative</code> il box pu&ograve; essere spostato verticalmente
+orizzontalmente rispetto alla sua posizione iniziale utilizzando
+propriet&agrave; come <code>top</code> o <code>left</code>:</p>
+
+<ul> 
+	<li><code>top: 10px</code> sposta l'elemento 10 pixel verso il
+	<em>basso</em></li>
+
+	<li><code>left: 10px</code> sposta l'elemento 10 pixel verso
+	<em>destra</em></li> 
+</ul>
+
+<p>Lo spazio che l'elemento utilizzava inizialmente &egrave; preservato e non
+verr&agrave; occupato da altri elementi, a meno che anche questi non siano
+stati spostati.</p>
+
+<h2><code>position: absolute</code></h2>
+
+<p>Con <code>absolute</code> l'elemento viene posizionato non rispetto alla sua
+posizione iniziale, ma ai bordi del suo antenato pi&ugrave; vicino che abbia a
+sua volta una <code>position</code> esplicitamente definita. Se questo non
+esiste, l'offset si intende rispetto al <em>viewport</em> iniziale, l'area
+nella quale viene visualizzato il documento.</p>
+
+<p>Un'altra differenza rilevante rispetto a <code>relative</code> &egrave; che
+l'elemento viene rimosso dal flow del documento, quindi lo spazio che avrebbe
+utilizzato con il posizionamento di default pu&ograve; essere occupato dagli
+elementi adiacenti.</p>
+
+<h2><code>position: fixed</code></h2>
+
+<p>Simile ad <code>absolute</code>, ma gli offset sono relativi al viewport
+corrente. L'elemento mantiene dunque sua posizione anche quando l'utente scorre
+la pagina.</p>
+
+<p>Anche in questo caso l'elemento non appartiene pi&ugrave; al normal
+flow.</p>
+
+<h2><code>position: sticky</code></h2>
+
+<p><code>sticky</code> &egrave; il tipo di posizionamento introdotto pi&ugrave;
+recentemente. Un elemento posizionato in questo modo &egrave; inizialmente
+inserito normalmente nel flow del documento, scorrendo insieme agli elementi
+adiacenti. Quando raggiunge un certo offset dal bordo del viewport, comincia
+invece a comportarsi in modo simile a <code>fixed</code>, restando fermo in
+posizione.</p>
+
+<p>Una caratteristica utile di questo posizionamento &egrave; che pur
+comportandosi come <code>fixed</code>, l'elemento resta nel flow del documento,
+quindi continua ad esser dimensionato secondo il suo contenitore e conserva uno
+spazio riservato all'interno della pagina. Se il viewport torna alla sua
+posizione originale, l'elemento torner&agrave; a collocarsi in questo
+spazio.</p>
+
+<p>Per le sue caratteristiche peculiari, &egrave; necessario prestare attenzione
+al suo utilizzo in presenza di antenati che possono avere barre di scorrimento,
+controllate con la propriet&agrave; <code>overflow</code>.</p>
