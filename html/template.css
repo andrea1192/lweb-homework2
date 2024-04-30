@@ -149,6 +149,10 @@ div.centered {
 	margin-bottom: 0;
 }
 
+#main span.colored {
+	color: red;
+}
+
 #footer {
 	z-index: 100;
 	min-height: 64px;

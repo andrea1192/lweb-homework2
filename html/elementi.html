@@ -1,0 +1,44 @@
+<h1>Elementi</h1>
+
+<p>Il contenuto di una pagina HTML &egrave; distribuito in <strong>elementi
+</strong>, che indicano il ruolo che tale contenuto ha all'interno del
+documento. Ci&ograve; &egrave; possibile grazie all'inclusione di
+<strong>tag</strong> a delimitare ciascun elemento: questi ne definiscono il
+tipo, e ciascuna tipologia appartenente allo standard corrisponde ad un ruolo
+ben definito con una propria semantica. Ad esempio:</p>
+
+<ul>
+	<li><code>p</code> indica che l'elemento &egrave; un <em>paragrafo</em></li>
+	<li><code>a</code> indica che l'elemento &egrave; un <em>link (anchor)</em>
+	</li>
+	<li><code>ul</code> indica una <em>lista non ordinata (unordered)</em></li>
+	<li><code>ol</code> indica una <em>lista ordinata (ordered)</em></li>
+	<li><code>em</code> indica una parte di testo da enfatizzare <em>(emphasis)
+	</em></li>
+	<li><code>strong</code> indica una parte di testo da evidenziare fortemente
+	</li>
+</ul>
+
+<p>In HTML, i tag sono racchiusi da parentesi uncinate o <em>chevron</em>:</p>
+
+<pre><code><span class="colored">&lt;h1&gt;</span>Questo &egrave; un titolo<span class="colored">&lt;/h1&gt;</span></code></pre>
+
+<h2>Attributi</h2>
+
+<p>Gli <strong>attributi</strong> sono coppie chiave-valore destinate a fornire
+ulteriori informazioni sull'elemento che accompagnano, completandone il ruolo.
+Devono essere previsti dalla specifica, e possono essere obbligatori o
+opzionali.</p>
+
+<p>Esempi di attributi obbligatori sono <code>src</code>, che indica il percorso
+di un'immagine, ed <code>alt</code>, che ne include una rappresentazione
+testuale visualizzabile in caso di problemi o riproducibile da uno screen
+reader:</p>
+
+<pre><code>&lt;img <span class="colored">src="/path/to/img"</span> <span class="colored">alt="Descrizione dell'immagine"</span> /&gt;</code></pre>
+
+<p>Un esempio di attributo ammissibile ma non richiesto &egrave; invece 
+<code>style</code>, che pu&ograve; essere specificato per qualsiasi elemento e 
+permette di definire inline regole CSS per controllarne la presentazione:</p>
+
+<pre><code>&lt;div <span class="colored">style="border: 1px solid;"</span>&gt;Ciao&lt;/div&gt;</code></pre>
