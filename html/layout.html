@@ -1,0 +1,82 @@
+<h1>Layout</h1>
+
+<p>Oltre alle modalit&agrave; di allineamento con gli elementi circostanti
+descritte in <a href="display.cgi?page=box-model">Box model</a>, l'attributo
+<code>display</code> pu&ograve; controllare il posizionamento degli elementi
+<em>all'interno</em> di ciascun box.<p>
+
+<h2><em>Normal flow</em></h2>
+
+<p>Per impostazione predefinita, il contenuto di un box &egrave; posizionato
+secondo il cosiddetto <em>normal flow</em>: come gi&agrave; descritto, gli
+elementi di tipo block riempiono orizzontalmente il box, crescendo
+verticalmente per accomodare il contenuto, mentre gli elementi inline non hanno
+dimensioni proprie e si adattano esclusivamente al proprio contenuto.</p>
+
+<p>Per cambiare questo comportamento, &egrave; possibile agire in due modi:</p>
+
+<ul> <li>alterare la posizione predefinita dei box interni, utilizzando la
+propriet&agrave; <code><a
+href="display.cgi?page=posizionamento">position</a></code></li>
+
+	<li>cambiare completamente il tipo di layout applicato, agendo
+	sull'attributo <code>display</code> del contenitore</li> </ul>
+
+<h2>Layout alternativi</h2>
+
+<h3><code>display: flex</code></h3>
+
+<p>Questa impostazione attiva il layout di tipo <strong>Flexbox</strong>,
+trasformando il box in un <em>flex container</em> e gli elementi contenuti in
+<em>flex items</em>.</p>
+
+<p>Flexbox &egrave; un tipo di layout pensato per disporre gli elementi su una
+dimensione, l'asse principale, specificato con <code>flex-direction</code>. Un
+utilizzo tipico &egrave; suddividere lo spazio disponibile su questo asse in
+parti uguali:</p>
+
+<pre><code>flex: 1</code></pre>
+
+<div class="note"> 
+	<p>Indipendentemente dall'impostazione corrente di 
+	<code><a href="display.cgi?page=box-model">box-sizing</a></code>, lo spazio 
+	disponibile si riferisce a quello residuo dopo l'applicazione di bordi e 
+	padding.</p>
+</div>
+
+<h3><code>display: grid</code></h3>
+
+<p><strong>CSS grid layout</strong> organizza gli elementi su due dimensioni, in
+righe e colonne, similarmente a quanto avveniva con le tabelle. Gli elementi
+all'interno prendono il nome di <em>grid items</em>.</p>
+
+<p>Righe e colonne possono essere create con <code>grid-template-rows</code> e
+<code>grid-template-columns</code>, specificando le loro dimensioni. Ad
+esempio, per ottenere un layout a tre colonne:</p>
+
+<pre><code>grid-template-columns: 15% 70% 15%</code></pre>
+
+<div class="note"> 
+	<p>Se colonne occupano complessivamente il 100% della larghezza del
+	contenitore, l'aggiunta di un gap tra di loro potrebbe provocare un 
+	<em>overflow</em> nelle regioni circostanti. Un modo per evitarlo &egrave;
+	l'utilizzo dell'unit&agrave; di misura <code>fr</code>, che divide solo lo
+	spazio effettivamente disponibile dopo l'applicazione di bordi e margini: 
+	</p>
+
+	<pre><code>grid-template-columns: 15fr 70fr 15fr</code></pre>
+</div>
+
+<p>L'altra dimensione si adatta automaticamente al contenuto, oppure pu&ograve;
+essere specificata esplicitamente con <code>grid-auto-columns</code> e
+<code>grid-auto-rows</code>:</p>
+
+<pre><code>grid-auto-rows: 100px</code></pre>
+
+<p>Una volta creata la griglia desiderata, gli elementi possono essere
+posizionati utilizzando le propriet&agrave; <code>grid-column</code> e
+<code>grid-row</code>:</p>
+
+<pre><code>
+.item1 { grid-column: 1; }<br />
+.item2 { grid-column: 2 / 3; } </code></pre>

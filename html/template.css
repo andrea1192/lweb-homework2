@@ -128,7 +128,9 @@ div.centered {
 	margin-left: 30px;
 }
 
-#main p code {
+#main p code,
+#main ul code,
+#main pre code {
 	background-color: rgb(240, 240, 240);
 	font-size: 1.1em;
 }
