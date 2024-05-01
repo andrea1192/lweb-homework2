@@ -1,0 +1,77 @@
+<h1>Correttezza</h1>
+
+<p>Per determinare la correttezza di un documento HTML, &egrave; necessario
+considerare due aspetti fondamentali: <strong>well-formedness</strong> e
+<strong>validit&agrave;</strong>.</p>
+
+<h2>Well-formedness</h2>
+
+<p>Un elemento si dice <strong>well-formed</strong> quando rispetta i seguenti
+requisiti:</p>
+
+<ul>
+	<li><p>&Egrave; delimitato correttamente, da un tag di apertura ed uno di 
+	chiusura. Nel caso di elementi vuoti, XHTML richiede che questi siano 
+	comunque chiusi inserendo una barra alla fine del tag di apertura:</p>
+
+	<pre><code>&lt;img src="/path/to/img" alt="Descrizione dell'immagine" <span class="colored">/</span>&gt;</code></pre></li>
+
+	<li>Non si sovrappone con altri elementi (<em>overlapping</em>), ma &egrave;
+	 aperto e chiuso al loro interno oppure li contiene completamente.</li>
+</ul>
+
+<p>In un documento well-formed, tutti gli elementi sono well-formed e contenuti
+ in un elemento root (es. <code>&lt;html&gt;</code>).</p>
+
+<h2>Validit&agrave;</h2>
+
+<p>Un documento si dice <strong>valido</strong> quando, oltre ad essere
+well-formed, rispetta tutti i requisiti imposti dalla grammatica del linguaggio
+nel quale &egrave; scritto, come i tipi di elemento ammessi e i relativi
+attributi. Questo permette di assicurarsi che ogni elemento abbia associata una
+semantica, e possa essere presentato dall'user agent in modo coerente con
+quanto aveva in mente l'autore del documento.</p>
+
+<p>Nei linguaggi basati su SGML e derivati, come XML e, per estensione, XHTML,
+la grammatica &egrave; tradizionalmente specificata nel <strong>Document Type
+Definition (DTD)</strong>, che definisce un tipo di documento ed un insieme di
+regole che tutti i documenti di tale tipo devono rispettare. Questo file
+pu&ograve; essere utilizzato da software di validazione per determinare se un
+documento rispetta tali regole o no, e dunque la sua validit&agrave;.</p>
+
+<p>Per XHTML sono stati stilati inizialmente tre DTD, corrispondenti a tre
+diverse tipologie di documento XHTML:</p>
+
+<h3><code>XHTML 1.0 Frameset</code></h3>
+
+<p>La tipologia di documento pi&ugrave; permissiva, che ammette cio&egrave; 
+pi&ugrave; tipi di elemento. Consente la creazione di pagine basate sulla 
+vecchia tecnologia dei frame.</p>
+
+<h3><code>XHTML 1.0 Transitional</code></h3>
+
+<p>Una tipologia concepita per facilitare la transizione di pagine create con 
+vecchie versioni di HTML.</p>
+
+<p>Ammette la presenza di elementi come <code>center</code>, che non riguardano
+la semantica ma la presentazione del contenuto. L'utilizzo di questo tipo di
+elementi &egrave; scoraggiato per la creazione di nuove pagine, in quanto
+violazione del principio di <em>
+<a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of
+concerns</a></em>.</p>
+
+<h3><code>XHTML 1.0 Strict</code></h3>
+
+<p>La tipologia pi&ugrave; restrittiva, che non ammette elementi che influenzano
+la presentazione.</p>
+
+<h3>Inclusione del DTD</h3>
+
+<p>Per associare ciascun documento alla grammatica per il quale &egrave;
+concepito, si include la dichiarazione DOCTYPE. Questa fa riferimento ad un DTD
+che pu&egrave; essere locale oppure globale (<code>PUBLIC</code>), definita in
+remoto.</p>
+
+<pre><code>&lt;!DOCTYPE html 
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</code></pre>
