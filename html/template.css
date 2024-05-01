@@ -135,16 +135,43 @@ div.centered {
 	font-size: 1.1em;
 }
 
+#main div.appl {
+	background-color: rgb(240, 255, 240);
+	border: 1px solid green;
+	padding: 10px;
+}
+
 #main div.note {
 	background-color: rgb(255, 240, 240);
 	border: 1px solid red;
 	padding: 10px;
 }
 
+#main div.appl::before,
+#main div.note::before {
+	display: block;
+	padding-bottom: 4px;
+	border-bottom: 1px dotted grey;
+	margin-bottom: 2px;
+	font-size: 0.8em;
+	font-weight: bold;
+	color: var(--menu-text-color);
+}
+
+#main div.appl::before {
+	content: "Applicazione";
+}
+
+#main div.note::before {
+	content: "Nota";
+}
+
+#main div.appl >p:first-child,
 #main div.note >p:first-child {
 	margin-top: 0;
 }
 
+#main div.appl >p:last-child,
 #main div.note >p:last-child {
 	margin-bottom: 0;
 }
