@@ -36,12 +36,56 @@ selezionato dal primo:</p>
 
 <h2>Stato e presentazione</h2>
 
+<h3>Pseudo-classi</h3>
+
 <p>Le <strong>pseudo-classi</strong> consentono una selezione basata
 sull'occorrenza di uno stato, ad esempio l'elemento correntemente sotto al
-puntatore oppure un collegamento ipertestuale gi&egrave; visitato.</p>
+puntatore oppure un collegamento ipertestuale gi&egrave; visitato. Si
+esprimono con l'operatore <code>:</code>.</p>
+
+<div class="appl">
+	<p>Si &egrave; fatto uso delle pseudo-classi:</p>
+
+	<ul>
+		<li>Nell'header, per allineare a destra il testo dell'ultimo
+		<em>flex-item</em> con <code>:last-child</code>;</li>
+
+		<li> Nel menu, per cambiare l'aspetto dei link puntati con
+		<code>:hover</code>;</li>
+
+		<li>In cima al contenuto ed ai blocchi di annotazione, dove si &egrave;
+		rimosso il margine superiore del primo paragrafo con un selettore che
+		sfrutta la pseudo-classe <code>:first-child</code>.</li>
+	</ul>
+</div>
+
+
+<h3>Pseudo-elementi</h3>
 
 <p>Gli <strong>pseudo-elementi</strong> permettono invece di selezionare
-<em>parte</em> del contenuto di un elemento esistente, basandosi su condizioni
-che possono essere verificate soltanto al momento della presentazione. Un
-esempio &egrave; la prima riga di un paragrafo, che pu&ograve; dipendere dalla
-dimensione della finestra del client. </p>
+<em>parte</em> del contenuto di un elemento esistente, anche se questo non
+&egrave; isolato al momento della creazione di un documento. Un impiego comune
+&egrave; l'inserimento di contenuto cosmetico prima o dopo del contenuto di un
+certo tipo o classe di elemento, che verr&agrave; replicato automaticamente su
+ogni istanza di tale elemento.</p>
+
+<p>Un'altra possibilit&agrave; offerta dagli pseudo-elementi &egrave; la
+selezione basata su condizioni la cui sussistenza pu&ograve; essere verificata
+soltanto al momento della presentazione. Un esempio &egrave; la prima riga di
+un paragrafo, che pu&ograve; dipendere dalla dimensione della finestra del
+client.</p>
+
+<p>Gli pseudo-elementi possono opzionalmente essere espressi con l'operatore
+<code>::</code>, per distinguerli dalle pseudo-classi.</p>
+
+<div class="appl">
+	<p>Un esempio di pseudo-elementi &egrave; nell'header, dove
+	<code>::before</code> ed <code>::after</code> aggiungono (pseudo-)elementi
+	cosmetici attorno al nome del sito.</p>
+
+	<p><code>::before</code> &egrave; stato inoltre usato in cima a questi
+	blocchi	di annotazioni, per inserire automaticamente un header. Analizzando
+	quest'area con i developer tools di un browser, si pu&ograve; notare come
+	questo elemento figuri come primo discendente del blocco, anche se assente
+	dal codice HTML.</p>
+</div>
