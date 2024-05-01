@@ -13,14 +13,23 @@ elementi di tipo block riempiono orizzontalmente il box, crescendo
 verticalmente per accomodare il contenuto, mentre gli elementi inline non hanno
 dimensioni proprie e si adattano esclusivamente al proprio contenuto.</p>
 
+<div class="appl">
+	<p>Essendo l'impostazione predefinita, gran parte del layout di questo
+	minisito &egrave; visualizzato in normal flow. In particolare, si &egrave;
+	scelto di lasciare che i blocchi header, wrapper e footer si disponessero
+	verticalmente uno dopo l'altro come previsto da questo modello.</p>
+</div>
+
 <p>Per cambiare questo comportamento, &egrave; possibile agire in due modi:</p>
 
-<ul> <li>alterare la posizione predefinita dei box interni, utilizzando la
-propriet&agrave; <code><a
-href="display.cgi?page=posizionamento">position</a></code></li>
+<ul>
+	<li>alterare la posizione predefinita dei box interni, utilizzando la
+	propriet&agrave; <code>
+	<a href="display.cgi?page=posizionamento">position</a></code></li>
 
 	<li>cambiare completamente il tipo di layout applicato, agendo
-	sull'attributo <code>display</code> del contenitore</li> </ul>
+	sull'attributo <code>display</code> del contenitore</li>
+</ul>
 
 <h2>Layout alternativi</h2>
 
@@ -35,13 +44,26 @@ dimensione, l'asse principale, specificato con <code>flex-direction</code>. Un
 utilizzo tipico &egrave; suddividere lo spazio disponibile su questo asse in
 parti uguali:</p>
 
-<pre><code>flex: 1</code></pre>
+<pre><code>
+.item1 { flex: 1; }<br />
+.item2 { flex: 1; }</code></pre>
 
 <div class="note"> 
 	<p>Indipendentemente dall'impostazione corrente di 
 	<code><a href="display.cgi?page=box-model">box-sizing</a></code>, lo spazio 
 	disponibile si riferisce a quello residuo dopo l'applicazione di bordi e 
 	padding.</p>
+</div>
+
+<div class="appl">
+	<p>Flexbox &egrave; stato utilizzato per disporre orizzontalmente i blocchi
+	interni alle sezioni header, wrapper e footer. Ad esempio, il wrapper
+	centrale &egrave; composto di due <em>flex-item</em> che costituiscono la
+	colonna del menu, di una larghezza fissata a 150px, e quella del contenuto,
+	che occupa il resto dello spazio.</p>
+
+	<p>Per ottenere un layout a tre colonne sarebbe stato sufficiente aggiungere
+	una terza <em>flex-item</em> all'interno dello stesso container.</p>
 </div>
 
 <h3><code>display: grid</code></h3>

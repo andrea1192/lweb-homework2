@@ -31,6 +31,22 @@ basta per il loro contenuto. Alcune propriet&agrave; geometriche, come
 differenza di inline, consente di impostare esplicitamente <code>width</code>
 ed <code>height</code>.
 
+<div class="appl">
+	<p>Si &egrave; scelto di modificare il tipo di box in due istanze:</p>
+
+	<ul>
+		<li>Nel menu laterale, per trasformare i link (<code>&lt;a&gt;</code>)
+		da <code>inline</code> a <code>block</code>: in questo modo occupano
+		interamente	l'interno dell'elemento che li contiene, e la superficie
+		cliccabile aumenta di conseguenza.</li>
+
+		<li>Nell'header di questi blocchi di annotazioni: in questo modo
+		&egrave; stato possibile impostare un margine per il contenuto
+		(<code>content</code>) della pseudo-classe <code>::before</code>, che
+		ha consentito di inserire automaticamente il titolo in ogni blocco.</li>
+	</ul>
+</div>
+
 <h2>Parti di un box</h2>
 
 <p>Ogni box ha quattro aree fondamentali:</p>

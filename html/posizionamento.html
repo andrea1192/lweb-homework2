@@ -64,3 +64,22 @@ spazio.</p>
 <p>Per le sue caratteristiche peculiari, &egrave; necessario prestare attenzione
 al suo utilizzo in presenza di antenati che possono avere barre di scorrimento,
 controllate con la propriet&agrave; <code>overflow</code>.</p>
+
+<div class="appl">
+	<p>In questo minisito, il posizionamento <code>sticky</code> &egrave; stato
+	utilizzato per due elementi:</p>
+
+	<ul>
+		<li>L'header, in modo da farlo restare visibile anche con lo
+		scorrimento della pagina. Si &egrave; scelto di non utilizzare
+		<code>fixed</code> in quanto questo avrebbe tolto l'header dal flow del
+		documento, rendendo necessaria l'applicazione di un margine superiore
+		per evitare che questo si sovrapponesse alla parte superiore del
+		contenuto.</li>
+
+		<li>Il menu di navigazione, per lo stesso motivo. In questo caso
+		&egrave; stato necessario aggiungere un offset superiore con
+		<code>top</code>, per bloccarlo ad una distanza approssimativamente
+		uguale allo spessore dell'header sommato al padding superiore.</li>
+	</ul>
+</div>
