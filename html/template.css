@@ -29,16 +29,19 @@ div.centered {
 	background-color: #FFFF;
 }
 
-#header >.centered {
+#header >.centered,
+#footer >.centered {
 	display: flex;
 	align-items: center;
 }
 
-#header >.centered >div {
+#header >.centered >div,
+#footer >.centered >div {
 	flex: 1;
 }
 
-#header >.centered >div:last-child {
+#header >.centered >div:last-child,
+#footer >.centered >div:last-child {
 	text-align: right;
 }
 
