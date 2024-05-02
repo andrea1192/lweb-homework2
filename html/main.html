@@ -1,14 +1,24 @@
-<h1>Lorem ipsum</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	Duis ac quam quis nisi consequat sagittis. Vivamus et augue
-	a libero dignissim semper eget et est. Nullam cursus est
-	porta mattis rutrum. Mauris rutrum, diam quis lobortis
-	laoreet, lacus mauris aliquet ex, ac feugiat mi turpis ut
-	metus. Nullam pulvinar non ex sit amet tempor. Quisque sit
-	amet magna pretium massa congue	pharetra. Ut sed tempor
-	lorem. Curabitur luctus eros mi, commodo aliquet tortor
-	scelerisque sed. Fusce non laoreet ex. Phasellus egestas
-	elementum odio. Morbi consectetur vitae libero a vestibulum.
-	Donec iaculis a augue nec convallis.
-</p>
-<p> Go to <a href="display.cgi?page=long">long version</a></p>
+<h1>Home</h1>
+
+<p>Questo minisito contiene parte dei miei appunti per il primo modulo del corso
+"Linguaggi per il Web" (A.A. 2023/2024), trascritti in un formato pi&ugrave;
+discorsivo ed aumentati con informazioni raccolte dalla 
+<a href="https://developer.mozilla.org/en-US/">documentazione di Mozilla</a>. I 
+contenuti sono navigabili utilizzando il menu a sinistra.</p>
+
+<h2>Funzionamento del sito</h2>
+
+<p>Ciascuna pagina &egrave; generata dinamicamente alla richiesta da un
+programma CGI, che carica un template, determina il contenuto desiderato e lo 
+inserisce in una zona designata del template. Non conoscendo la struttura delle
+directory in cui verr&agrave; inserito, si &egrave; scelto di far passare ogni
+link (locale) attraverso questo programma, in modo da poter cambiare tutti i
+link intervenendo in un solo posto.</p>
+
+<p>Per impostazione predefinita, i contenuti vengono cercati nella 
+<em>document root</em> del server, resa disponibile al programma tramite la 
+variabile d'ambiente <code>DOCUMENT_ROOT</code>. Il documento richiesto &egrave;
+invece determinato sulla base di <code>QUERY_STRING</code>. Tuttavia, queste
+variabili possono essere sovrascritte inserendo dei valori personalizzati nel
+file di override (di default <code>overrides.env</code>), che &egrave; caricato
+ad ogni avvio del programma.</p>
