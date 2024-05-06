@@ -3,7 +3,7 @@ services:
     image: php:8.3-apache-bookworm
     container_name: apache-homework2
     volumes:
-      - ./html:/usr/local/apache2/htdocs
+      - ./html:/var/www/html
 
     ports:
       - 8080:80
