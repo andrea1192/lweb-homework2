@@ -123,6 +123,10 @@ div.centered {
 	text-decoration: none;
 }
 
+#menu li >a.active {
+	font-weight: bold;
+}
+
 #main > *:first-child {
 	margin-top: 0;
 }
