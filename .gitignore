@@ -4,3 +4,4 @@
 
 # Secrets
 .env
+connection.php
