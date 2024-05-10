@@ -99,10 +99,10 @@
 	}
 
 	function connect() {
-		$db_host = $_GET['db_host'];
-		$db_user = $_GET['db_user'];
-		$db_pass = $_GET['db_pass'];
-		$db_name = $_GET['db_name'];
+		$db_host = $_POST['db_host'];
+		$db_user = $_POST['db_user'];
+		$db_pass = $_POST['db_pass'];
+		$db_name = $_POST['db_name'];
 
 		try {
 			return new mysqli($db_host, $db_user, $db_pass, $db_name);
@@ -151,7 +151,7 @@
 		load_categories($list, $connection);
 		load_list($list, $connection);
 
-		print("Database \"{$_GET['db_name']}\" initialized.");
+		print("Database \"{$_POST['db_name']}\" initialized.");
 	}
 
 	function restore() {
@@ -160,7 +160,7 @@
 		$sql = "DROP TABLE IF EXISTS Pages, Categories;";
 		$connection->query($sql);
 
-		print("Database \"{$_GET['db_name']}\" restored.");
+		print("Database \"{$_POST['db_name']}\" restored.");
 	}
 
 ?>

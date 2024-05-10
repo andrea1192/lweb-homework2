@@ -27,9 +27,9 @@
 		foreach ($settings as $name => $details) {
 			$label = $details['label'];
 
-			if (isset($_GET[$name]) && $_GET['action'] != 'Reimposta') {
+			if (isset($_POST[$name]) && $_POST['action'] != 'Reimposta') {
 
-				$value = $_GET[$name];
+				$value = $_POST[$name];
 			} else {
 
 				$value = $details['value'];
@@ -45,9 +45,9 @@
 		}
 	}
 
-	if (isset($_GET['action'])) {
+	if (isset($_POST['action'])) {
 
-		switch ($_GET['action']) {
+		switch ($_POST['action']) {
 
 			case 'Installa': install(); 
 				break;
@@ -72,7 +72,7 @@
 	</head>
 
 	<body>
-		<form action="" method="get">
+		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
 			<div id="settings">
 				<h1>Credenziali per il database</h1>
 				<?= generate_labels() ?>
