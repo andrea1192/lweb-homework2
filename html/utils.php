@@ -65,6 +65,7 @@
 
 		} catch (mysqli_sql_exception $e) {
 			print_error($e);
+			throw $e;
 		}
 	}
 
@@ -109,6 +110,7 @@
 
 		} catch (mysqli_sql_exception $e) {
 			print_error($e);
+			throw $e;
 		}
 	}
 
@@ -135,32 +137,49 @@
 
 		} catch (mysqli_sql_exception $e) {
 			print_error($e);
+			throw $e;
 		}
 	}
 
 	function print_error($e) {
-		die ("Database error: {$e->getMessage()} ({$e->getFile()}:{$e->getLine()})");
+		msg_failure(
+			"Errore del database: {$e->getMessage()} ({$e->getFile()}:{$e->getLine()})");
 	}
 
 	function install() {
 		global $list;
 
-		$connection = connect();
-		create_tables($connection);
+		try {
+			$connection = connect();
+			create_tables($connection);
 
-		load_categories($list, $connection);
-		load_list($list, $connection);
+			load_categories($list, $connection);
+			load_list($list, $connection);
 
-		print("Database \"{$_POST['db_name']}\" initialized.");
+		} catch (mysqli_sql_exception $e) {
+			$errors = true;
+		} 
+
+		if (!isset($errors)) {
+			msg_success("Database \"{$_POST['db_name']}\" inizializzato.");
+		}
 	}
 
 	function restore() {
-		$connection = connect();
 
-		$sql = "DROP TABLE IF EXISTS Pages, Categories;";
-		$connection->query($sql);
+		try {
+			$connection = connect();
 
-		print("Database \"{$_POST['db_name']}\" restored.");
+			$sql = "DROP TABLE IF EXISTS Pages, Categories;";
+			$connection->query($sql);
+
+		} catch (mysqli_sql_exception $e) {
+			$errors = true;
+		} 
+
+		if (!isset($errors)) {
+			msg_success("Database \"{$_POST['db_name']}\" ripristinato.");
+		}
 	}
 
 ?>

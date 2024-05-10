@@ -20,6 +20,8 @@
 		]
 	];
 
+	$message = '';
+	$success = true;
 
 	function generate_labels() {
 		global $settings;
@@ -43,6 +45,35 @@
 
 			print($html);
 		}
+	}
+
+	function msg_success($msg) {
+		set_message($msg, true);
+	}
+
+	function msg_failure($msg) {
+		set_message($msg, false);
+	}
+
+	function set_message($msg, $sx) {
+		global $message;
+		global $success;
+		$message = $msg;
+		$success = $sx;
+	}
+
+	function generate_message() {
+		global $message;
+		global $success;
+		$class = $success ? 'success' : 'failure';
+
+		$msg = <<<END
+		<div class="mbox {$class}">
+			$message
+		</div>
+		END;
+
+		print($msg);
 	}
 
 	if (isset($_POST['action'])) {
@@ -75,7 +106,7 @@
 		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
 			<div id="settings">
 				<h1>Credenziali per il database</h1>
-				<?= generate_labels() ?>
+				<?php generate_labels() ?>
 			</div>
 			<div id="controls">
 				<input type="submit" name="action" value="Installa" />
@@ -83,6 +114,14 @@
 				<input type="submit" name="action" value="Ripristina il database" />
 			</div>
 		</form>
+
+		<?php
+			if(isset($_POST['action']) && $_POST['action'] != 'Reimposta') {
+
+				generate_message();
+			}
+		?>
+
 	</body>
 	
 </html>

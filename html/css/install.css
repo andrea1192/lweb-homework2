@@ -40,3 +40,22 @@ input[type="submit"][value="Installa"] {
 input[type="submit"][value~="Ripristina"] {
 	color: red;
 }
+
+div.mbox {
+	position: absolute;
+	width: 90%;
+	left: 20px;
+	bottom: 50px;
+	border: 1px solid;
+	padding: 20px;
+}
+
+.mbox.success {
+	border-color: green;
+	background-color: rgb(240, 255, 240);
+}
+
+.mbox.failure {
+	border-color: red;
+	background-color: rgb(255, 240, 240);
+}
