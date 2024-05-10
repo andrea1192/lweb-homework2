@@ -5,7 +5,7 @@
 	define('ACTIVE_PAGE_CLASS', 'active');
 
 	$const = get_defined_constants();
-	$source = $_GET[PAGE_PTR] ?? DEFAULT_CONTENT;
+	$current = $_GET[PAGE_PTR] ?? DEFAULT_CONTENT;
 
 	function generate_prolog() {
 
@@ -14,11 +14,11 @@
 
 	function generate_link($page) {
 		global $const;
-		global $source;
+		global $current;
 
 		$link = "href=\"{$_SERVER['PHP_SELF']}?{$const['PAGE_PTR']}={$page}\"";
 
-		if ($page == $source) {
+		if ($page == $current) {
 			$link .= " class=\"{$const['ACTIVE_PAGE_CLASS']}\"";
 		}
 
@@ -27,9 +27,9 @@
 
 	function print_content() {
 		global $const;
-		global $source;
+		global $current;
 
-		readfile("static/{$source}.{$const['PAGE_EXT']}");
+		readfile("static/{$current}.{$const['PAGE_EXT']}");
 	}
 
 ?>
