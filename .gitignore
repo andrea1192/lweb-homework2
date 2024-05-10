@@ -1,3 +1,6 @@
 # Binaries
 *.cgi
 *.exe
+
+# Secrets
+.env
