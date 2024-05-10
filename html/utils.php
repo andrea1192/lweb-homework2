@@ -100,10 +100,12 @@
 	}
 
 	function connect() {
-		$db_host = $_POST['db_host'];
-		$db_user = $_POST['db_user'];
-		$db_pass = $_POST['db_pass'];
-		$db_name = $_POST['db_name'];
+		global $settings;
+
+		$db_host = $settings['db_host'];
+		$db_user = $settings['db_user'];
+		$db_pass = $settings['db_pass'];
+		$db_name = $settings['db_name'];
 
 		try {
 			return new mysqli($db_host, $db_user, $db_pass, $db_name);
@@ -148,6 +150,7 @@
 
 	function install() {
 		global $list;
+		global $settings;
 
 		try {
 			$connection = connect();
@@ -161,11 +164,12 @@
 		} 
 
 		if (!isset($errors)) {
-			msg_success("Database \"{$_POST['db_name']}\" inizializzato.");
+			msg_success("Database \"{$settings['db_name']}\" inizializzato.");
 		}
 	}
 
 	function restore() {
+		global $settings;
 
 		try {
 			$connection = connect();
@@ -178,7 +182,7 @@
 		} 
 
 		if (!isset($errors)) {
-			msg_success("Database \"{$_POST['db_name']}\" ripristinato.");
+			msg_success("Database \"{$settings['db_name']}\" ripristinato.");
 		}
 	}
 

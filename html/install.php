@@ -2,6 +2,13 @@
 	require_once("connection.php");
 	require_once("utils.php");
 
+	$labels = [
+		'Host' => 'db_host',
+		'Username' => 'db_user',
+		'Password' => 'db_pass',
+		'Nome' => 'db_name'
+	];
+
 	$list = [
 		'none' => [
 			['path' => 'static/main.html', 'title' => 'Home']
@@ -24,18 +31,11 @@
 	$success = true;
 
 	function generate_labels() {
+		global $labels;
 		global $settings;
 
-		foreach ($settings as $name => $details) {
-			$label = $details['label'];
-
-			if (isset($_POST[$name]) && $_POST['action'] != 'Reimposta') {
-
-				$value = $_POST[$name];
-			} else {
-
-				$value = $details['value'];
-			}
+		foreach ($labels as $label => $name) {
+			$value = $settings[$name];
 			
 			$html = <<<END
 			<label>{$label}: 
@@ -82,9 +82,7 @@
 
 			case 'Installa': install(); 
 				break;
-			case 'Reimposta': 
-				break;
-			case 'Ripristina il database': restore(); 
+			case 'Ripristina': restore();
 				break;
 			default: die ("Azione non valida.");
 		}
@@ -110,13 +108,12 @@
 			</div>
 			<div id="controls">
 				<input type="submit" name="action" value="Installa" />
-				<input type="submit" name="action" value="Reimposta" />
-				<input type="submit" name="action" value="Ripristina il database" />
+				<input type="submit" name="action" value="Ripristina" />
 			</div>
 		</form>
 
 		<?php
-			if(isset($_POST['action']) && $_POST['action'] != 'Reimposta') {
+			if(isset($_POST['action'])) {
 
 				generate_message();
 			}
