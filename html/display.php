@@ -9,7 +9,7 @@
 
 	function generate_prolog() {
 
-		echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 	}
 
 	function generate_link($page) {
@@ -22,14 +22,14 @@
 			$link .= " class=\"{$const['ACTIVE_PAGE_CLASS']}\"";
 		}
 
-		echo $link;
+		return $link;
 	}
 
 	function print_content() {
 		global $const;
 		global $source;
 
-		readfile("./{$source}.{$const['PAGE_EXT']}");
+		readfile("static/{$source}.{$const['PAGE_EXT']}");
 	}
 
 ?>
