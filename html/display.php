@@ -1,5 +1,4 @@
 <?php
-	require_once("connection.php");
 	require_once("utils.php");
 
 	define('DEFAULT_CONTENT', 'main');

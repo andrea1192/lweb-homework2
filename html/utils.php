@@ -1,4 +1,5 @@
 <?php
+	require_once("connection.php");
 
 	function get_ext($file) {
 		$pattern = '/([^\/]+)\.(.*)/';
@@ -34,7 +35,7 @@
 		return $parts[1] ?? $parts[0];
 	}
 
-	function scan_article($file, $target_connection) {
+	function scan_article($file, $connection) {
 		$text = file_get_contents($file); // Possible SQL injection
 
 		$name = get_UID($file);
@@ -44,13 +45,13 @@
 		$article = [];
 
 		$article['name'] = $name;
-		$article['title'] = $target_connection->real_escape_string($title);
-		$article['text'] = $target_connection->real_escape_string($text);
+		$article['title'] = $connection->real_escape_string($title);
+		$article['text'] = $connection->real_escape_string($text);
 
 		return $article;
 	}
 
-	function insert_article($article, $target_connection) {
+	function insert_article($article, $connection) {
 		$sql = <<<END
 		INSERT INTO Pages VALUES
 		('{$article['name']}', 
@@ -61,40 +62,38 @@
 		END;
 
 		try {
-			$target_connection->query($sql);
+			$connection->query($sql);
 
 		} catch (mysqli_sql_exception $e) {
-			print_error($e);
+			log_error($e);
 			throw $e;
 		}
 	}
 
-	function load_categories($list, $target_connection) {
+	function load_categories($list, $connection) {
 		$i = 1;
 
 		foreach ($list as $category => $articles) {
 
 			$sql = "INSERT INTO Categories VALUES ('{$category}', {$i});";
-
-			$target_connection->query($sql);
+			$connection->query($sql);
 
 			$i++;
 		}
 	}
 
-	function load_list($list, $target_connection) {
+	function load_list($list, $connection) {
 
 		foreach ($list as $category => $articles) {
 
 			foreach ($articles as $number => $article) {
-
-				$row = scan_article($article['path'], $target_connection);
+				$row = scan_article($article['path'], $connection);
 
 				$row['position'] = $number+1;
 				$row['category'] = $category;
 				$row['title'] = $article['title'];
 
-				insert_article($row, $target_connection);
+				insert_article($row, $connection);
 			}
 		}
 	}
@@ -111,7 +110,7 @@
 			return new mysqli($db_host, $db_user, $db_pass, $db_name);
 
 		} catch (mysqli_sql_exception $e) {
-			print_error($e);
+			log_error($e);
 			throw $e;
 		}
 	}
@@ -138,12 +137,12 @@
 			$connection->query($sql);
 
 		} catch (mysqli_sql_exception $e) {
-			print_error($e);
+			log_error($e);
 			throw $e;
 		}
 	}
 
-	function print_error($e) {
+	function log_error($e) {
 		msg_failure(
 			"Errore del database: {$e->getMessage()} ({$e->getFile()}:{$e->getLine()})");
 	}
