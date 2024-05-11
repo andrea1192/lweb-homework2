@@ -6,6 +6,9 @@
 	$const = get_defined_constants();
 	$current = $_GET[PAGE_PTR] ?? DEFAULT_CONTENT;
 
+	$message = '';
+	$success = true;
+
 	function generate_prolog() {
 
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
@@ -40,5 +43,34 @@
 		}
 
 		return $link;
+	}
+
+	function generate_message() {
+		global $message;
+		global $success;
+		$class = $success ? 'success' : 'failure';
+
+		$msg = <<<END
+		<div class="mbox {$class}">
+			$message
+		</div>
+		END;
+
+		print($msg);
+	}
+
+	function msg_success($msg) {
+		set_message($msg, true);
+	}
+
+	function msg_failure($msg) {
+		set_message($msg, false);
+	}
+
+	function set_message($msg, $sx) {
+		global $message;
+		global $success;
+		$message = $msg;
+		$success = $sx;
 	}
 ?>
