@@ -186,4 +186,37 @@
 		}
 	}
 
+	function get_categories($connection) {
+		$sql = "SELECT name FROM Categories ORDER BY position;";
+		$result = $connection->query($sql);
+
+		$categories = [];
+
+		while ($category = $result->fetch_column()) {
+			$categories[] = $category;
+		}
+
+		return $categories;
+	}
+
+	function get_articles($category, $connection) {
+		$sql = "SELECT name,title FROM Pages WHERE category = '{$category}' ORDER BY position;";
+		$result = $connection->query($sql);
+
+		$articles = [];
+
+		while ($article = $result->fetch_assoc()) {
+			$articles[] = $article;
+		}
+
+		return $articles;
+	}
+
+	function get_article($article, $connection) {
+		$sql = "SELECT title,text FROM Pages WHERE name = '{$article}';";
+		$result = $connection->query($sql);
+
+		return $result->fetch_assoc();
+	}
+
 ?>

@@ -1,7 +1,9 @@
 <?php
+	require_once("connection.php");
+	require_once("utils.php");
+
 	define('DEFAULT_CONTENT', 'main');
 	define('PAGE_PTR', 'page');
-	define('PAGE_EXT', 'html');
 	define('ACTIVE_PAGE_CLASS', 'active');
 
 	$const = get_defined_constants();
@@ -10,6 +12,25 @@
 	function generate_prolog() {
 
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+	}
+
+	function generate_menu() {
+		$connection = connect();
+
+		foreach (get_categories($connection) as $category) {
+			if ($category != 'none') {
+				print("<h1>{$category}</h1>\n");
+			}
+
+			print("<ul>");
+
+			foreach (get_articles($category, $connection) as $article) {
+				$href = generate_link($article['name']);
+				print("<li><a {$href}>{$article['title']}</a></li>\n");
+			}
+
+			print("</ul>");
+		}
 	}
 
 	function generate_link($page) {
@@ -26,10 +47,13 @@
 	}
 
 	function print_content() {
-		global $const;
 		global $current;
 
-		readfile("static/{$current}.{$const['PAGE_EXT']}");
+		$connection = connect();
+		$article = get_article($current, $connection);
+
+		print("<h1>{$article['title']}</h1>");
+		print($article['text']);
 	}
 
 ?>
@@ -57,18 +81,7 @@
 		<div id="wrapper" class="centered">
 			<div id="menu">
 				<div class="sticky">
-					<h1>XHTML</h1>
-					<ul>
-						<li><a <?= generate_link('elementi') ?>>Elementi</a></li>
-						<li><a <?= generate_link('correttezza') ?>>Correttezza</a></li>
-					</ul>
-					<h1>CSS</h1>
-					<ul>
-						<li><a <?= generate_link('selettori') ?>>Selettori</a></li>
-						<li><a <?= generate_link('box-model') ?>>Box model</a></li>
-						<li><a <?= generate_link('layout') ?>>Layout</a></li>
-						<li><a <?= generate_link('posizionamento') ?>>Posizionamento</a></li>
-					</ul>
+					<?php generate_menu() ?>
 				</div>
 			</div>
 
