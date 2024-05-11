@@ -14,12 +14,12 @@
 			['path' => 'static/main.html', 'title' => 'Home']
 		],
 
-		'xhtml' => [
+		'XHTML' => [
 			['path' => 'static/elementi.html', 'title' => 'Elementi'],
 			['path' => 'static/correttezza.html', 'title' => 'Correttezza']
 		],
 
-		'css' => [
+		'CSS' => [
 			['path' => 'static/selettori.html', 'title' => 'Selettori'],
 			['path' => 'static/box-model.html', 'title' => 'Box model'],
 			['path' => 'static/layout.html', 'title' => 'Layout'],

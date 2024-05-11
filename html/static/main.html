@@ -8,17 +8,12 @@ contenuti sono navigabili utilizzando il menu a sinistra.</p>
 
 <h2>Funzionamento del sito</h2>
 
-<p>Ciascuna pagina &egrave; generata dinamicamente alla richiesta da un
-programma CGI, che carica un template, determina il contenuto desiderato e lo 
-inserisce in una zona designata del template. Non conoscendo la struttura delle
-directory in cui verr&agrave; inserito, si &egrave; scelto di far passare ogni
-link (locale) attraverso questo programma, in modo da poter cambiare tutti i
-link intervenendo in un solo posto.</p>
+<p>Ciascuna pagina &egrave; generata dinamicamente da uno script PHP, che 
+carica la lista dei contenuti disponibili e quello richiesto da un database.</p>
 
-<p>Per impostazione predefinita, i contenuti vengono cercati nella 
-<em>document root</em> del server, resa disponibile al programma tramite la 
-variabile d'ambiente <code>DOCUMENT_ROOT</code>. Il documento richiesto &egrave;
-invece determinato sulla base di <code>QUERY_STRING</code>. Tuttavia, queste
-variabili possono essere sovrascritte inserendo dei valori personalizzati nel
-file di override (di default <code>overrides.env</code>), che &egrave; caricato
-ad ogni avvio del programma.</p>
+<p>Il database &egrave; inizializzato dallo script 
+<code><a href="install.php">install.php</a></code>. Dopo essersi collegato con
+le credenziali inserite in <code>connection.php</code>, questo crea le tabelle
+necessarie ed utilizza una lista di contenuti per popolarle. Per impostazione
+predefinita, questa lista &egrave; integrata nello script ed include contenuti
+prelevati dalla cartella <code>static</code>.</p>
