@@ -1,6 +1,8 @@
 <?php
 	require_once("connection.php");
 
+	$connection = null;
+
 	function get_ext($file) {
 		$pattern = '/([^\/]+)\.(.*)/';
 
@@ -35,7 +37,8 @@
 		return $parts[1] ?? $parts[0];
 	}
 
-	function scan_article($file, $connection) {
+	function scan_article($file) {
+		$connection = connect();
 		$text = file_get_contents($file); // Possible SQL injection
 
 		$name = get_UID($file);
@@ -51,7 +54,8 @@
 		return $article;
 	}
 
-	function insert_article($article, $connection) {
+	function insert_article($article) {
+		$connection = connect();
 		$sql = <<<END
 		INSERT INTO Pages VALUES
 		('{$article['name']}', 
@@ -70,7 +74,8 @@
 		}
 	}
 
-	function load_categories($list, $connection) {
+	function load_categories($list) {
+		$connection = connect();
 		$i = 1;
 
 		foreach ($list as $category => $articles) {
@@ -82,23 +87,25 @@
 		}
 	}
 
-	function load_list($list, $connection) {
+	function load_list($list) {
+		$connection = connect();
 
 		foreach ($list as $category => $articles) {
 
 			foreach ($articles as $number => $article) {
-				$row = scan_article($article['path'], $connection);
+				$row = scan_article($article['path']);
 
 				$row['position'] = $number+1;
 				$row['category'] = $category;
 				$row['title'] = $article['title'];
 
-				insert_article($row, $connection);
+				insert_article($row);
 			}
 		}
 	}
 
 	function connect() {
+		global $connection;
 		global $settings;
 
 		$db_host = $settings['db_host'];
@@ -107,7 +114,7 @@
 		$db_name = $settings['db_name'];
 
 		try {
-			return new mysqli($db_host, $db_user, $db_pass, $db_name);
+			return $connection ?? new mysqli($db_host, $db_user, $db_pass, $db_name);
 
 		} catch (mysqli_sql_exception $e) {
 			log_error($e);
@@ -115,7 +122,8 @@
 		}
 	}
 
-	function create_tables($connection) {
+	function create_tables() {
+		$connection = connect();
 		try {
 			$sql = <<<'END'
 			CREATE TABLE Categories (
@@ -153,10 +161,10 @@
 
 		try {
 			$connection = connect();
-			create_tables($connection);
+			create_tables();
 
-			load_categories($list, $connection);
-			load_list($list, $connection);
+			load_categories($list);
+			load_list($list);
 
 		} catch (mysqli_sql_exception $e) {
 			$errors = true;
@@ -185,7 +193,8 @@
 		}
 	}
 
-	function get_categories($connection) {
+	function get_categories() {
+		$connection = connect();
 		$sql = "SELECT name FROM Categories ORDER BY position;";
 		$result = $connection->query($sql);
 
@@ -198,7 +207,8 @@
 		return $categories;
 	}
 
-	function get_articles($category, $connection) {
+	function get_articles($category) {
+		$connection = connect();
 		$sql = "SELECT name,title FROM Pages WHERE category = '{$category}' ORDER BY position;";
 		$result = $connection->query($sql);
 
@@ -211,7 +221,8 @@
 		return $articles;
 	}
 
-	function get_article($article, $connection) {
+	function get_article($article) {
+		$connection = connect();
 		$sql = "SELECT title,text FROM Pages WHERE name = '{$article}';";
 		$result = $connection->query($sql);
 

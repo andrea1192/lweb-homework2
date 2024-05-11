@@ -14,16 +14,15 @@
 	}
 
 	function generate_menu() {
-		$connection = connect();
 
-		foreach (get_categories($connection) as $category) {
+		foreach (get_categories() as $category) {
 			if ($category != 'none') {
 				print("<h1>{$category}</h1>\n");
 			}
 
 			print("<ul>");
 
-			foreach (get_articles($category, $connection) as $article) {
+			foreach (get_articles($category) as $article) {
 				$href = generate_link($article['name']);
 				print("<li><a {$href}>{$article['title']}</a></li>\n");
 			}
@@ -48,8 +47,7 @@
 	function print_content() {
 		global $current;
 
-		$connection = connect();
-		$article = get_article($current, $connection);
+		$article = get_article($current);
 
 		print("<h1>{$article['title']}</h1>");
 		print($article['text']);
