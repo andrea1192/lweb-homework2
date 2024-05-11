@@ -12,11 +12,11 @@
 	}
 
 	if (isset($_POST['title']) && isset($_POST['text'])) {
-
 		$connection = connect();
+		
 		$article['name'] = $current;
-		$article['title'] = $connection->real_escape_string($_POST['title']);
-		$article['text'] = $connection->real_escape_string($_POST['text']);
+		$article['title'] = $_POST['title'];
+		$article['text'] = $_POST['text'];
 
 		update_article($article);
 	}
