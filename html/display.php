@@ -33,6 +33,7 @@
 		<title>Linguaggi per il Web</title>
 
 		<link rel="stylesheet" href="css/style.css" type="text/css" />
+		<link rel="stylesheet" href="css/display.css" type="text/css" />
 	</head>
 
 	<body>

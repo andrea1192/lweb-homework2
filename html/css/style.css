@@ -128,68 +128,6 @@ div.centered {
 	border-radius: 8px 0 0 8px;
 }
 
-#main > *:first-child {
-	margin-top: 0;
-}
-
-#main pre {
-	margin-left: 30px;
-}
-
-#main p code,
-#main ul code,
-#main pre code {
-	background-color: rgb(240, 240, 240);
-	font-size: 1.1em;
-}
-
-#main div.appl {
-	background-color: rgb(240, 255, 240);
-	border: 1px solid green;
-	margin: 1em 0;
-	padding: 10px;
-}
-
-#main div.note {
-	background-color: rgb(255, 240, 240);
-	border: 1px solid red;
-	margin: 1em 0;
-	padding: 10px;
-}
-
-#main div.appl::before,
-#main div.note::before {
-	display: block;
-	padding-bottom: 4px;
-	border-bottom: 1px dotted grey;
-	margin-bottom: 2px;
-	font-size: 0.8em;
-	font-weight: bold;
-	color: var(--menu-text-color);
-}
-
-#main div.appl::before {
-	content: "Applicazione";
-}
-
-#main div.note::before {
-	content: "Nota";
-}
-
-#main div.appl >p:first-child,
-#main div.note >p:first-child {
-	margin-top: 0;
-}
-
-#main div.appl >p:last-child,
-#main div.note >p:last-child {
-	margin-bottom: 0;
-}
-
-#main span.colored {
-	color: red;
-}
-
 #footer {
 	z-index: 100;
 	min-height: 64px;
