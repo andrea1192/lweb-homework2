@@ -1,5 +1,31 @@
-#main > *:first-child {
-	margin-top: 0;
+#main #article-header {
+	position: relative;
+	align-items: center;
+	padding-bottom: 5px;
+	border-bottom: 1px solid var(--borders-color);
+}
+
+#main #article-header >h1 {
+	margin: 0;
+}
+
+#main #article-header >a:last-child {
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	border: 1px solid var(--borders-color);
+	border-radius: 10px;
+	padding: 5px 10px;
+	text-align: center;
+	color: var(--menu-text-color);
+	text-decoration: none;
+	background-color: #FFFF;
+}
+
+#main #article-header >a:last-child::before {
+	content: "\270e";
+	font-size: 2em;
 }
 
 #main pre {

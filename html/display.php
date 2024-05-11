@@ -6,14 +6,22 @@
 		global $current;
 
 		$article = get_article($current);
+		$edit_link = generate_link($current, 'edit.php');
 
-		print("<h1>{$article['title']}</h1>");
-		print($article['text']);
+		$content = <<<END
+		<div id="article-header">
+			<h1>{$article['title']}</h1>
+			<a {$edit_link} title="Modifica questo articolo"></a>
+		</div>
+		{$article['text']}
+		END;
+
+		print($content);
 	}
 
 	if (isset($_POST['title']) && isset($_POST['text'])) {
 		$connection = connect();
-		
+
 		$article['name'] = $current;
 		$article['title'] = $_POST['title'];
 		$article['text'] = $_POST['text'];

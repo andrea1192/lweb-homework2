@@ -33,11 +33,12 @@
 		}
 	}
 
-	function generate_link($page) {
+	function generate_link($page, $action = null) {
 		global $const;
 		global $current;
 
-		$link = "href=\"{$const['DEFAULT_ACTION']}?{$const['PAGE_PTR']}={$page}\"";
+		$action = $action ?? $const['DEFAULT_ACTION'];
+		$link = "href=\"{$action}?{$const['PAGE_PTR']}={$page}\"";
 
 		if ($page == $current) {
 			$link .= " class=\"{$const['ACTIVE_PAGE_CLASS']}\"";
