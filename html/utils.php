@@ -41,21 +41,20 @@
 		$connection = connect();
 		$text = file_get_contents($file); // Possible SQL injection
 
-		$name = get_UID($file);
-		$title = get_title($text);
-		$text = strip_title($text);
-
 		$article = [];
-
-		$article['name'] = $name;
-		$article['title'] = $connection->real_escape_string($title);
-		$article['text'] = $connection->real_escape_string($text);
+		$article['name'] = get_UID($file);
+		$article['title'] = get_title($text);
+		$article['text'] = strip_title($text);
 
 		return $article;
 	}
 
 	function insert_article($article) {
 		$connection = connect();
+
+		$article['title'] = $connection->real_escape_string($article['title']);
+		$article['text'] = $connection->real_escape_string($article['text']);
+
 		$sql = <<<END
 		INSERT INTO Pages VALUES
 		('{$article['name']}', 
