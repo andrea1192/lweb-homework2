@@ -73,6 +73,29 @@
 		}
 	}
 
+	function update_article($article) {
+		$connection = connect();
+
+		$article['title'] = $connection->real_escape_string($article['title']);
+		$article['text'] = $connection->real_escape_string($article['text']);
+
+		$sql = <<<END
+		UPDATE Pages
+		SET title = '{$article['title']}', text = '{$article['text']}'
+		WHERE name = '{$article['name']}';
+		END;
+
+		try {
+			$connection->query($sql);
+
+		} catch (mysqli_sql_exception $e) {
+			log_error($e);
+			throw $e;
+		}
+
+		msg_success("\"{$article['title']}\" aggiornato con successo.");
+	}
+
 	function load_categories($list) {
 		$connection = connect();
 		$i = 1;

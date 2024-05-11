@@ -1,4 +1,5 @@
 <?php
+	define('DEFAULT_ACTION', 'display.php');
 	define('DEFAULT_CONTENT', 'main');
 	define('PAGE_PTR', 'page');
 	define('ACTIVE_PAGE_CLASS', 'active');
@@ -36,7 +37,7 @@
 		global $const;
 		global $current;
 
-		$link = "href=\"{$_SERVER['PHP_SELF']}?{$const['PAGE_PTR']}={$page}\"";
+		$link = "href=\"{$const['DEFAULT_ACTION']}?{$const['PAGE_PTR']}={$page}\"";
 
 		if ($page == $current) {
 			$link .= " class=\"{$const['ACTIVE_PAGE_CLASS']}\"";

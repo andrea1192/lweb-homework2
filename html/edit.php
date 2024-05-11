@@ -2,23 +2,20 @@
 	require_once("utils.php");
 	require_once("view.php");
 
-	function print_content() {
+	function edit_content() {
 		global $current;
 
 		$article = get_article($current);
 
-		print("<h1>{$article['title']}</h1>");
-		print($article['text']);
-	}
+		$edit_UI = <<<END
+		<h1><input name="title" value="{$article['title']}" /></h1>
 
-	if (isset($_POST['title']) && isset($_POST['text'])) {
+		<textarea name="text" spellcheck="false">{$article['text']}</textarea>
 
-		$connection = connect();
-		$article['name'] = $current;
-		$article['title'] = $connection->real_escape_string($_POST['title']);
-		$article['text'] = $connection->real_escape_string($_POST['text']);
+		<input type="submit" value="Salva" />
+		END;
 
-		update_article($article);
+		print($edit_UI);
 	}
 
 ?>
@@ -33,6 +30,7 @@
 		<title>Linguaggi per il Web</title>
 
 		<link rel="stylesheet" href="css/style.css" type="text/css" />
+		<link rel="stylesheet" href="css/edit.css" type="text/css" />
 	</head>
 
 	<body>
@@ -51,13 +49,9 @@
 			</div>
 
 			<div id="main">
-				<?php 
-					if (isset($_POST['title']) && isset($_POST['text'])) {
-
-						generate_message();
-					}
-
-					print_content() ?>
+				<form action="<?= "display.php?page={$current}" ?>" method="post">
+					<?php edit_content() ?>
+				</form>
 			</div>
 		</div>
 		<div id="footer">
