@@ -81,7 +81,3 @@
 #main div.note >p:last-child {
 	margin-bottom: 0;
 }
-
-#main span.colored {
-	color: red;
-}
