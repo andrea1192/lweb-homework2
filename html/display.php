@@ -19,12 +19,25 @@
 		print($content);
 	}
 
+	function fix_sample_code($text) {
+		$pattern = '/<code([^>]*)>(.*?)<\/code>/s';
+
+		function replacement_code($matches) {
+			$content = htmlspecialchars($matches[2], ENT_XHTML);
+			$element = "<code{$matches[1]}>{$content}</code>";
+
+			return $element;
+		}
+
+		return preg_replace_callback($pattern, 'replacement_code', $text);
+	}
+
 	if (isset($_POST['title']) && isset($_POST['text'])) {
 		$connection = connect();
 
 		$article['name'] = $current;
 		$article['title'] = $_POST['title'];
-		$article['text'] = $_POST['text'];
+		$article['text'] = fix_sample_code($_POST['text']);
 
 		update_article($article);
 	}
