@@ -255,7 +255,7 @@
 		}
 	}
 
-	function check_input($input) {
+	function check_input($input, $current) {
 
 		if (isset($_POST['user']) && isset($_POST['pass'])) {
 

@@ -20,7 +20,7 @@
 
 	if (!empty($_POST)) {
 
-		check_input($_POST);
+		check_input($_POST, $current);
 	}
 
 ?>
