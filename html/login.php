@@ -46,7 +46,7 @@
 				?>
 
 				<h1>Login</h1>
-				<form action="edit.php" method="post">
+				<form action="<?= get_referrer() ?>" method="post">
 					<div id="fields">
 						<label for="name">Nome utente:</label>
 						<input name="user" />
