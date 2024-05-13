@@ -1,4 +1,6 @@
 <?php
+	require_once("session.php");
+
 	define('DEFAULT_ACTION', 'display.php');
 	define('DEFAULT_CONTENT', 'main');
 	define('PAGE_PTR', 'page');
@@ -16,10 +18,12 @@
 	}
 
 	function generate_header() {
+		$logged_in = get_status() ? 'Logged in' : 'Logged out';
+
 		$header = <<<END
 			<div class="centered">
 				<div id="title"><a href="display.php">Linguaggi per il Web</a></div>
-				<div id="part">P01: XHTML+CSS</div>
+				<div id="part">{$logged_in}</div>
 			</div>
 		END;
 

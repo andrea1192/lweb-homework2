@@ -218,6 +218,9 @@
 		$stored = $connection->query($sql)->fetch_assoc();
 
 		if (password_verify($password, $stored['pass'])) {
+
+			$_SESSION['user'] = $username;
+
 			msg_success("Login avvenuto con successo.");
 
 		} else {
