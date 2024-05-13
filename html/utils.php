@@ -27,6 +27,19 @@
 		return $matches[1] ?? '';
 	}
 
+	function fix_sample_code($text) {
+		$pattern = '/<code([^>]*)>(.*?)<\/code>/s';
+
+		function replacement_code($matches) {
+			$content = htmlspecialchars($matches[2], ENT_XHTML);
+			$element = "<code{$matches[1]}>{$content}</code>";
+
+			return $element;
+		}
+
+		return preg_replace_callback($pattern, 'replacement_code', $text);
+	}
+
 	function strip_title($article) {
 		$title_pattern = '/^[[:space:]]*<h1>[[:alpha:] ]*<\/h1>/';
 		$space_pattern = '/^[[:space:]]*/';
