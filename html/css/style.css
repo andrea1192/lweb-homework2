@@ -139,6 +139,7 @@ div.mbox {
 	position: sticky;
 	top: calc(var(--header-height) + 40px);
 	left: 0;
+	margin-bottom: 15px;
 	border: 1px solid;
 	padding: 20px;
 }

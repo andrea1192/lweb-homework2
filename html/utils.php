@@ -199,6 +199,19 @@
 		}
 	}
 
+	function authenticate_user($username, $password) {
+		$connection = connect();
+		$sql = "SELECT user,pass FROM Users WHERE user = '{$username}';";
+		$stored = $connection->query($sql)->fetch_assoc();
+
+		if (password_verify($password, $stored['pass'])) {
+			msg_success("Login avvenuto con successo.");
+
+		} else {
+			msg_failure("Credenziali non corrette!");
+		}
+	}
+
 	function log_error($e) {
 		msg_failure(
 			"Errore del database: {$e->getMessage()} ({$e->getFile()}:{$e->getLine()})");
@@ -239,6 +252,24 @@
 
 		if (!isset($errors)) {
 			msg_success("Database \"{$settings['db_name']}\" ripristinato.");
+		}
+	}
+
+	function check_input($input) {
+
+		if (isset($_POST['user']) && isset($_POST['pass'])) {
+
+			authenticate_user($_POST['user'], $_POST['pass']);
+		}
+
+		if (isset($_POST['title']) && isset($_POST['text'])) {
+			$connection = connect();
+
+			$article['name'] = $current;
+			$article['title'] = $_POST['title'];
+			$article['text'] = fix_sample_code($_POST['text']);
+
+			update_article($article);
 		}
 	}
 

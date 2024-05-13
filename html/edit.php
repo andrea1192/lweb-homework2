@@ -18,6 +18,11 @@
 		print($edit_UI);
 	}
 
+	if (!empty($_POST)) {
+
+		check_input($_POST);
+	}
+
 ?>
 
 <?= generate_prolog() ?>
@@ -50,7 +55,14 @@
 
 			<div id="main">
 				<form action="<?= "display.php?page={$current}" ?>" method="post">
-					<?php edit_content() ?>
+					<?php
+						if (!empty($_POST)) {
+
+							generate_message();
+						}
+
+						edit_content();
+					?>
 				</form>
 			</div>
 		</div>

@@ -2,12 +2,9 @@
 	require_once("utils.php");
 	require_once("view.php");
 
-	function authenticate_user($username, $password) {
-		$connection = connect();
-		$sql = "SELECT user,pass FROM Users WHERE user = '{$username}';";
-		$stored = $connection->query($sql)->fetch_assoc();
+	if (!empty($_POST)) {
 
-		return password_verify($password, $stored['pass']);
+		check_input($_POST);
 	}
 
 ?>
@@ -42,26 +39,24 @@
 			</div>
 
 			<div id="main">
-				<h1>Login</h1>
+
 				<?php
-					if (isset($_GET['submit'])) {
+					if (!empty($_POST)) {
 
-						if (authenticate_user($_GET['user'], $_GET['pass']))
-							print("<p>Credenziali corrette</p>");
-
-						else
-							print("<p>Credenziali sbagliate</p>");
+						generate_message();
 					}
 
 				?>
-				<form action="" method="get">
+
+				<h1>Login</h1>
+				<form action="edit.php" method="post">
 					<div id="fields">
 						<label for="name">Nome utente:</label>
 						<input name="user" />
 						<label for="pass">Password:</label>
-						<input type="password" name="pass" />
+						<input type="pass" name="pass" />
 					</div>
-					<input type="submit" name="submit" value="Submit" /> 
+					<input type="submit" value="Accedi" />
 				</form>
 			</div>
 		</div>

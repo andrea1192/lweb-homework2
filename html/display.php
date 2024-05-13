@@ -32,14 +32,9 @@
 		return preg_replace_callback($pattern, 'replacement_code', $text);
 	}
 
-	if (isset($_POST['title']) && isset($_POST['text'])) {
-		$connection = connect();
+	if (!empty($_POST)) {
 
-		$article['name'] = $current;
-		$article['title'] = $_POST['title'];
-		$article['text'] = fix_sample_code($_POST['text']);
-
-		update_article($article);
+		check_input($_POST);
 	}
 
 ?>
@@ -74,12 +69,13 @@
 
 			<div id="main">
 				<?php 
-					if (isset($_POST['title']) && isset($_POST['text'])) {
+					if (!empty($_POST)) {
 
 						generate_message();
 					}
 
-					print_content() ?>
+					print_content();
+				?>
 			</div>
 		</div>
 		<div id="footer">
