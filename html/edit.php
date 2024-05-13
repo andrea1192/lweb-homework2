@@ -41,10 +41,7 @@
 	<body>
 		<a name="top"></a>
 		<div id="header">
-			<div class="centered">
-				<div id="title"><a href="display.php">Linguaggi per il Web</a></div>
-				<div id="part">P01: XHTML+CSS</div>
-			</div>
+			<?php generate_header() ?>
 		</div>
 		<div id="wrapper" class="centered">
 			<div id="menu">

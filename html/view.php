@@ -15,6 +15,17 @@
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 	}
 
+	function generate_header() {
+		$header = <<<END
+			<div class="centered">
+				<div id="title"><a href="display.php">Linguaggi per il Web</a></div>
+				<div id="part">P01: XHTML+CSS</div>
+			</div>
+		END;
+
+		print($header);
+	}
+
 	function generate_menu() {
 
 		foreach (get_categories() as $category) {
