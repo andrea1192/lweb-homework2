@@ -166,6 +166,33 @@
 			END;
 			$connection->query($sql);
 
+			$sql = <<<'END'
+			CREATE TABLE Users (
+			user 		VARCHAR(160)	PRIMARY KEY,
+			pass 	 	VARCHAR(255)	NOT NULL);
+			END;
+			$connection->query($sql);
+
+		} catch (mysqli_sql_exception $e) {
+			log_error($e);
+			throw $e;
+		}
+	}
+
+	function create_user($username, $password) {
+		$connection = connect();
+
+		$user['user'] = $username;
+		$user['pass'] = password_hash($password, PASSWORD_DEFAULT);
+
+		$sql = <<<END
+		INSERT INTO Users VALUES
+		('{$user['user']}', '{$user['pass']}');
+		END;
+
+		try {
+			$connection->query($sql);
+
 		} catch (mysqli_sql_exception $e) {
 			log_error($e);
 			throw $e;
@@ -203,7 +230,7 @@
 		try {
 			$connection = connect();
 
-			$sql = "DROP TABLE IF EXISTS Pages, Categories;";
+			$sql = "DROP TABLE IF EXISTS Pages, Categories, Users;";
 			$connection->query($sql);
 
 		} catch (mysqli_sql_exception $e) {

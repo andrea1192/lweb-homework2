@@ -3,10 +3,15 @@
 	require_once("view.php");
 
 	$labels = [
-		'Host' => 'db_host',
-		'Username' => 'db_user',
-		'Password' => 'db_pass',
-		'Nome' => 'db_name'
+		'db' => [
+			'Host' => 'db_host',
+			'Username' => 'db_user',
+			'Password' => 'db_pass',
+			'Nome' => 'db_name'],
+
+		'user' => [
+			'Username' => 'app_user',
+			'Password' => 'app_pass']
 	];
 
 	$list = [
@@ -27,16 +32,17 @@
 		]
 	];
 
-	function generate_labels() {
+	function generate_labels($group, $enabled = true) {
 		global $labels;
 		global $settings;
 
-		foreach ($labels as $label => $name) {
+		foreach ($labels[$group] as $label => $name) {
+			$disable = $enabled ? '' : 'disabled="disabled"';
 			$value = $settings[$name];
 			
 			$html = <<<END
 			<label>{$label}: 
-				<input name="{$name}" value="{$value}" readonly="readonly" />
+				<input name="{$name}" value="{$value}" {$disable} />
 			</label>
 			END;
 
@@ -48,10 +54,18 @@
 
 		switch ($_POST['action']) {
 
-			case 'Installa': install(); 
+			case 'Installa':
+				$user = $_POST[$labels['user']['Username']];
+				$pass = $_POST[$labels['user']['Password']];
+
+				install();
+				create_user($user, $pass);
 				break;
-			case 'Ripristina': restore();
+
+			case 'Ripristina':
+				restore();
 				break;
+
 			default: die ("Azione non valida.");
 		}
 	}
@@ -72,7 +86,12 @@
 		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
 			<div id="settings">
 				<h1>Credenziali per il database</h1>
-				<?php generate_labels() ?>
+				<p>Estratte da connection.php</p>
+				<?php generate_labels('db', false) ?>
+
+				<h1>Utente predefinito</h1>
+				<p>Per provare il login nell'applicazione</p>
+				<?php generate_labels('user') ?>
 			</div>
 			<div id="controls">
 				<input type="submit" name="action" value="Installa" />
