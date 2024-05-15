@@ -1,7 +1,7 @@
 <?php
 	require_once("controller.php");
 
-	define('DEFAULT_ACTION', 'display.php');
+	define('DEFAULT_VIEW', 'display.php');
 	define('DEFAULT_CONTENT', 'main');
 
 	$current = $_GET['page'] ?? DEFAULT_CONTENT;
@@ -15,13 +15,14 @@
 	}
 
 	function generate_header() {
+		$home = generate_link();
 		$login = '<a href="login.php">Accedi</a>';
 		$logout = '<a href="logout.php">Esci</a>';
 		$logged_in = get_authorization() ? $logout : $login;
 
 		$header = <<<END
 			<div class="centered">
-				<div id="title"><a href="display.php">Linguaggi per il Web</a></div>
+				<div id="title"><a {$home}>Linguaggi per il Web</a></div>
 				<div id="part">{$logged_in}</div>
 			</div>
 		END;
@@ -39,7 +40,7 @@
 			print("<ul>");
 
 			foreach (get_articles($category) as $article) {
-				$href = generate_link($article['name']);
+				$href = generate_link(page:$article['name']);
 				print("<li><a {$href}>{$article['title']}</a></li>\n");
 			}
 
@@ -47,11 +48,12 @@
 		}
 	}
 
-	function generate_link($page, $action = null) {
+	function generate_link($view = DEFAULT_VIEW, $page = DEFAULT_CONTENT) {
 		global $current;
 
-		$action = $action ?? DEFAULT_ACTION;
-		$link = "href=\"{$action}?page={$page}\"";
+		$href = rewrite_URL($view, page:$page);
+
+		$link = "href=\"{$href}\"";
 
 		if ($page == $current) {
 			$link .= " class=\"active\"";

@@ -52,7 +52,7 @@
 			</div>
 
 			<div id="main">
-				<form action="<?= rewrite_URL($referrer, 'display.php', 'edit') ?>" method="post">
+				<form action="<?= rewrite_URL($referrer, view:'display.php', action:'edit') ?>" method="post">
 					<?php
 						if (!empty($message)) {
 

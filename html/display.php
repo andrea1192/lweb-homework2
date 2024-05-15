@@ -5,7 +5,7 @@
 		global $current;
 
 		$article = get_article($current);
-		$edit_link = generate_link($current, 'edit.php');
+		$edit_link = generate_link(view:'edit.php', page:$current);
 
 		$content = <<<END
 		<div id="article-header">

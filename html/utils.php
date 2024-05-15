@@ -1,17 +1,17 @@
 <?php
 	require_once("controller.php");
 
-	function rewrite_URL($URL, $base = null, $action = null) { //utils
+	function rewrite_URL($URL, $view = null, $page = null, $action = null) { //utils
 		$URL_path = parse_url($URL, PHP_URL_PATH);
 		$URL_query = parse_url($URL, PHP_URL_QUERY);
 
-		if (isset($base)) {
+		if (isset($view)) {
 			$old_basename = basename($URL_path);
-			$new_basename = $base;
+			$new_basename = $view;
 			$URL_path = str_replace($old_basename, $new_basename, $URL_path);
 		}
 
-		if (isset($action)) {
+		if (isset($page) || isset($action)) {
 
 			if (isset($URL_query)) {
 				parse_str($URL_query, $args);
@@ -19,7 +19,8 @@
 				$args = [];
 			}
 
-			$args['action'] = $action;
+			if (isset($page)) $args['page'] = $page;
+			if (isset($action)) $args['action'] = $action;
 
 			$URL_query = http_build_query($args);
 		}
