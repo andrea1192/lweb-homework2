@@ -3,15 +3,20 @@
 
 	function edit_content() {
 		global $current;
+		global $referrer;
 
+		$form_action = rewrite_URL($referrer, view:'display.php', action:'edit');
 		$article = get_article($current);
 
 		$edit_UI = <<<END
-		<h1><input name="title" value="{$article['title']}" /></h1>
+		<form action="{$form_action}" method="post">
 
-		<textarea name="text" spellcheck="false">{$article['text']}</textarea>
+			<h1><input name="title" value="{$article['title']}" /></h1>
 
-		<input type="submit" value="Salva" />
+			<textarea name="text" spellcheck="false">{$article['text']}</textarea>
+
+			<input type="submit" value="Salva" />
+		</form>
 		END;
 
 		print($edit_UI);
@@ -52,16 +57,14 @@
 			</div>
 
 			<div id="main">
-				<form action="<?= rewrite_URL($referrer, view:'display.php', action:'edit') ?>" method="post">
-					<?php
-						if (!empty($message)) {
+				<?php
+					if (!empty($message)) {
 
-							generate_message();
-						}
+						generate_message();
+					}
 
-						edit_content();
-					?>
-				</form>
+					edit_content();
+				?>
 			</div>
 		</div>
 		<div id="footer">
