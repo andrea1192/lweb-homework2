@@ -123,7 +123,7 @@
 		$sql = "SELECT user,pass FROM Users WHERE user = '{$username}';";
 		$stored = $connection->query($sql)->fetch_assoc();
 
-		if (password_verify($password, $stored['pass'])) {
+		if (isset($stored) && password_verify($password, $stored['pass'])) {
 
 			$_SESSION['user'] = $username;
 

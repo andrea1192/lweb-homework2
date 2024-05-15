@@ -46,7 +46,7 @@
 						<label for="name">Nome utente:</label>
 						<input name="user" autofocus="autofocus" />
 						<label for="pass">Password:</label>
-						<input type="pass" name="pass" />
+						<input name="pass" type="password" />
 					</div>
 					<input type="submit" value="Accedi" />
 				</form>
