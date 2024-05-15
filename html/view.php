@@ -1,13 +1,10 @@
 <?php
-	require_once("utils.php");
+	require_once("controller.php");
 
 	define('DEFAULT_ACTION', 'display.php');
 	define('DEFAULT_CONTENT', 'main');
-	define('PAGE_PTR', 'page');
-	define('ACTIVE_PAGE_CLASS', 'active');
 
-	$const = get_defined_constants();
-	$current = $_GET[PAGE_PTR] ?? DEFAULT_CONTENT;
+	$current = $_GET['page'] ?? DEFAULT_CONTENT;
 
 	$message = '';
 	$success = true;
@@ -51,14 +48,13 @@
 	}
 
 	function generate_link($page, $action = null) {
-		global $const;
 		global $current;
 
-		$action = $action ?? $const['DEFAULT_ACTION'];
-		$link = "href=\"{$action}?{$const['PAGE_PTR']}={$page}\"";
+		$action = $action ?? DEFAULT_ACTION;
+		$link = "href=\"{$action}?page={$page}\"";
 
 		if ($page == $current) {
-			$link .= " class=\"{$const['ACTIVE_PAGE_CLASS']}\"";
+			$link .= " class=\"active\"";
 		}
 
 		return $link;

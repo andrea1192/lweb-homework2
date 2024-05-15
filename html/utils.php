@@ -1,7 +1,5 @@
 <?php
-	require_once("session.php");
-	require_once("model.php");
-	require_once("view.php");
+	require_once("controller.php");
 
 	function rewrite_URL($URL, $base = null, $action = null) { //utils
 		$URL_path = parse_url($URL, PHP_URL_PATH);
@@ -195,50 +193,6 @@
 		if (!isset($errors)) {
 			msg_success("Database \"{$settings['db_name']}\" ripristinato.");
 		}
-	}
-
-	function check_actions($current) { //controller
-
-		if (!isset($_GET['action'])) return;
-
-		switch ($_GET['action']) {
-
-			case 'login':
-				if (isset($_POST['user']) && isset($_POST['pass'])) {
-
-					authenticate_user($_POST['user'], $_POST['pass']); //model
-				} break;
-
-			case 'login_failed':
-				msg_failure("Credenziali non corrette!"); break;
-
-			case 'access_denied':
-				msg_failure("Per questa azione devi essere loggato!"); break;
-
-			case 'logout':
-				msg_success("Logout avvenuto."); break;
-
-			case 'edit':
-				if (isset($_POST['title']) && isset($_POST['text'])) {
-					$connection = connect(); //model
-
-					$article['name'] = $current;
-					$article['title'] = $_POST['title'];
-					$article['text'] = fix_sample_code($_POST['text']); //utils
-
-					update_article($article); //model
-				} break;
-
-			default: return;
-		}
-	}
-
-	function msg_success($msg) {
-		set_message($msg, true);
-	}
-
-	function msg_failure($msg) {
-		set_message($msg, false);
 	}
 
 ?>

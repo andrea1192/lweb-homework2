@@ -1,6 +1,6 @@
 <?php
 	require_once("connection.php");
-	require_once("utils.php");
+	require_once("controller.php");
 
 	$connection = null;
 
@@ -82,7 +82,7 @@
 		}
 	}
 
-	function get_categories() {
+	function select_categories() {
 		$connection = connect();
 		$sql = "SELECT name FROM Categories ORDER BY position;";
 		$result = $connection->query($sql);
@@ -96,7 +96,7 @@
 		return $categories;
 	}
 
-	function get_articles($category) {
+	function select_articles($category) {
 		$connection = connect();
 		$sql = "SELECT name,title FROM Pages WHERE category = '{$category}' ORDER BY position;";
 		$result = $connection->query($sql);
@@ -110,7 +110,7 @@
 		return $articles;
 	}
 
-	function get_article($article) {
+	function select_article($article) {
 		$connection = connect();
 		$sql = "SELECT title,text FROM Pages WHERE name = '{$article}';";
 		$result = $connection->query($sql);
