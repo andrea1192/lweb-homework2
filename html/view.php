@@ -18,7 +18,9 @@
 	}
 
 	function generate_header() {
-		$logged_in = get_status() ? 'Logged in' : 'Logged out';
+		$login = '<a href="login.php">Accedi</a>';
+		$logout = '<a href="logout.php">Esci</a>';
+		$logged_in = get_authorization() ? $logout : $login;
 
 		$header = <<<END
 			<div class="centered">

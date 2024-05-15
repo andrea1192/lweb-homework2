@@ -224,7 +224,9 @@
 			msg_success("Login avvenuto con successo.");
 
 		} else {
-			msg_failure("Credenziali non corrette!");
+			header('Location:'.append_action('login.php', 'login_failed'));
+
+			exit();
 		}
 	}
 
@@ -271,21 +273,39 @@
 		}
 	}
 
-	function check_input($input, $current) {
+	function check_actions($current) {
 
-		if (isset($_POST['user']) && isset($_POST['pass'])) {
+		if (!isset($_GET['action'])) return;
 
-			authenticate_user($_POST['user'], $_POST['pass']);
-		}
+		switch ($_GET['action']) {
 
-		if (isset($_POST['title']) && isset($_POST['text'])) {
-			$connection = connect();
+			case 'login':
+				if (isset($_POST['user']) && isset($_POST['pass'])) {
 
-			$article['name'] = $current;
-			$article['title'] = $_POST['title'];
-			$article['text'] = fix_sample_code($_POST['text']);
+					authenticate_user($_POST['user'], $_POST['pass']);
+				} break;
 
-			update_article($article);
+			case 'login_failed':
+				msg_failure("Credenziali non corrette!"); break;
+
+			case 'access_denied':
+				msg_failure("Per questa azione devi essere loggato!"); break;
+
+			case 'logout':
+				msg_success("Logout avvenuto."); break;
+
+			case 'edit':
+				if (isset($_POST['title']) && isset($_POST['text'])) {
+					$connection = connect();
+
+					$article['name'] = $current;
+					$article['title'] = $_POST['title'];
+					$article['text'] = fix_sample_code($_POST['text']);
+
+					update_article($article);
+				} break;
+
+			default: return;
 		}
 	}
 

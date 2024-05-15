@@ -19,11 +19,7 @@
 		print($content);
 	}
 
-	if (!empty($_POST)) {
-
-		check_input($_POST, $current);
-	}
-
+	check_actions($current);
 ?>
 
 <?= generate_prolog() ?>
@@ -53,7 +49,7 @@
 
 			<div id="main">
 				<?php 
-					if (!empty($_POST)) {
+					if (!empty($message)) {
 
 						generate_message();
 					}

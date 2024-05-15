@@ -18,11 +18,13 @@
 		print($edit_UI);
 	}
 
-	if (!empty($_POST)) {
+	check_actions($current);
 
-		check_input($_POST, $current);
+	if (!get_authorization()) {
+		header('Location:'.append_action('login.php', 'access_denied'));
+
+		exit();
 	}
-
 ?>
 
 <?= generate_prolog() ?>
@@ -51,9 +53,9 @@
 			</div>
 
 			<div id="main">
-				<form action="<?= "display.php?page={$current}" ?>" method="post">
+				<form action="<?= get_referrer('edit') ?>" method="post">
 					<?php
-						if (!empty($_POST)) {
+						if (!empty($message)) {
 
 							generate_message();
 						}

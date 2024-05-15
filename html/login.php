@@ -2,11 +2,7 @@
 	require_once("utils.php");
 	require_once("view.php");
 
-	if (!empty($_POST)) {
-
-		check_input($_POST, $current);
-	}
-
+	check_actions($current);
 ?>
 
 <?= generate_prolog() ?>
@@ -38,7 +34,7 @@
 			<div id="main">
 
 				<?php
-					if (!empty($_POST)) {
+					if (!empty($message)) {
 
 						generate_message();
 					}
@@ -46,7 +42,7 @@
 				?>
 
 				<h1>Login</h1>
-				<form action="<?= get_referrer() ?>" method="post">
+				<form action="<?= get_referrer('login') ?>" method="post">
 					<div id="fields">
 						<label for="name">Nome utente:</label>
 						<input name="user" />
