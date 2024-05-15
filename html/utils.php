@@ -1,9 +1,9 @@
 <?php
-	require_once("connection.php");
+	require_once("session.php");
+	require_once("model.php");
+	require_once("view.php");
 
-	$connection = null;
-
-	function rewrite_URL($URL, $base = null, $action = null) {
+	function rewrite_URL($URL, $base = null, $action = null) { //utils
 		$URL_path = parse_url($URL, PHP_URL_PATH);
 		$URL_query = parse_url($URL, PHP_URL_QUERY);
 
@@ -29,7 +29,7 @@
 		return "{$URL_path}?{$URL_query}";
 	}
 
-	function get_ext($file) {
+	function get_ext($file) { //utils
 		$pattern = '/([^\/]+)\.(.*)/';
 
 		preg_match($pattern, $file, $matches);
@@ -37,7 +37,7 @@
 		return $matches[2] ?? '';
 	}
 
-	function get_UID($file) {
+	function get_UID($file) { //utils
 		$pattern = '/([^\/]+)\.(.*)/';
 
 		preg_match($pattern, $file, $matches);
@@ -45,7 +45,7 @@
 		return $matches[1] ?? '';
 	}
 
-	function get_title($article) {
+	function get_title($article) { //utils
 		$pattern = '/<h1>([[:alpha:] ]*)<\/h1>/';
 
 		preg_match($pattern, $article, $matches);
@@ -53,7 +53,7 @@
 		return $matches[1] ?? '';
 	}
 
-	function fix_sample_code($text) {
+	function fix_sample_code($text) { //utils
 		$pattern = '/<code([^>]*)>(.*?)<\/code>/s';
 
 		function replacement_code($matches) {
@@ -66,7 +66,7 @@
 		return preg_replace_callback($pattern, 'replacement_code', $text);
 	}
 
-	function strip_title($article) {
+	function strip_title($article) { //utils
 		$title_pattern = '/^[[:space:]]*<h1>[[:alpha:] ]*<\/h1>/';
 		$space_pattern = '/^[[:space:]]*/';
 
@@ -76,8 +76,7 @@
 		return $parts[1] ?? $parts[0];
 	}
 
-	function scan_article($file) {
-		$connection = connect();
+	function scan_article($file) { //utils
 		$text = file_get_contents($file); // Possible SQL injection
 
 		$article = [];
@@ -88,102 +87,24 @@
 		return $article;
 	}
 
-	function insert_article($article) {
-		$connection = connect();
-
-		$article['title'] = $connection->real_escape_string($article['title']);
-		$article['text'] = $connection->real_escape_string($article['text']);
-
-		$sql = <<<END
-		INSERT INTO Pages VALUES
-		('{$article['name']}', 
-			{$article['position']}, 
-			'{$article['category']}', 
-			'{$article['title']}', 
-			'{$article['text']}');
-		END;
-
-		try {
-			$connection->query($sql);
-
-		} catch (mysqli_sql_exception $e) {
-			log_error($e);
-			throw $e;
-		}
-	}
-
-	function update_article($article) {
-		$connection = connect();
-
-		$article['title'] = $connection->real_escape_string($article['title']);
-		$article['text'] = $connection->real_escape_string($article['text']);
-
-		$sql = <<<END
-		UPDATE Pages
-		SET title = '{$article['title']}', text = '{$article['text']}'
-		WHERE name = '{$article['name']}';
-		END;
-
-		try {
-			$connection->query($sql);
-
-		} catch (mysqli_sql_exception $e) {
-			log_error($e);
-			throw $e;
-		}
-
-		msg_success("\"{$article['title']}\" aggiornato con successo.");
-	}
-
-	function load_categories($list) {
-		$connection = connect();
-		$i = 1;
-
-		foreach ($list as $category => $articles) {
-
-			$sql = "INSERT INTO Categories VALUES ('{$category}', {$i});";
-			$connection->query($sql);
-
-			$i++;
-		}
-	}
-
-	function load_list($list) {
+	function insert_list($list) { //model/setup
 		$connection = connect();
 
 		foreach ($list as $category => $articles) {
 
 			foreach ($articles as $number => $article) {
-				$row = scan_article($article['path']);
+				$row = scan_article($article['path']); //utils
 
 				$row['position'] = $number+1;
 				$row['category'] = $category;
 				$row['title'] = $article['title'];
 
-				insert_article($row);
+				insert_article($row); //model
 			}
 		}
 	}
 
-	function connect() {
-		global $connection;
-		global $settings;
-
-		$db_host = $settings['db_host'];
-		$db_user = $settings['db_user'];
-		$db_pass = $settings['db_pass'];
-		$db_name = $settings['db_name'];
-
-		try {
-			return $connection ?? new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-		} catch (mysqli_sql_exception $e) {
-			log_error($e);
-			throw $e;
-		}
-	}
-
-	function create_tables() {
+	function create_tables() { //model/setup
 		$connection = connect();
 		try {
 			$sql = <<<'END'
@@ -213,12 +134,12 @@
 			$connection->query($sql);
 
 		} catch (mysqli_sql_exception $e) {
-			log_error($e);
+			log_error($e); //model
 			throw $e;
 		}
 	}
 
-	function create_user($username, $password) {
+	function create_user($username, $password) { //model/setup
 		$connection = connect();
 
 		$user['user'] = $username;
@@ -233,44 +154,21 @@
 			$connection->query($sql);
 
 		} catch (mysqli_sql_exception $e) {
-			log_error($e);
+			log_error($e); //model
 			throw $e;
 		}
 	}
 
-	function authenticate_user($username, $password) {
-		$connection = connect();
-		$sql = "SELECT user,pass FROM Users WHERE user = '{$username}';";
-		$stored = $connection->query($sql)->fetch_assoc();
-
-		if (password_verify($password, $stored['pass'])) {
-
-			$_SESSION['user'] = $username;
-
-			msg_success("Login avvenuto con successo.");
-
-		} else {
-			header('Location:'.rewrite_URL('login.php', action:'login_failed'));
-
-			exit();
-		}
-	}
-
-	function log_error($e) {
-		msg_failure(
-			"Errore del database: {$e->getMessage()} ({$e->getFile()}:{$e->getLine()})");
-	}
-
-	function install() {
+	function install() { //setup
 		global $list;
 		global $settings;
 
 		try {
-			$connection = connect();
-			create_tables();
+			$connection = connect();		//model
+			create_tables();				//model
 
-			load_categories($list);
-			load_list($list);
+			insert_categories($list);		//model
+			insert_list($list);				//model
 
 		} catch (mysqli_sql_exception $e) {
 			$errors = true;
@@ -281,11 +179,11 @@
 		}
 	}
 
-	function restore() {
+	function restore() { //setup
 		global $settings;
 
 		try {
-			$connection = connect();
+			$connection = connect(); //model
 
 			$sql = "DROP TABLE IF EXISTS Pages, Categories, Users;";
 			$connection->query($sql);
@@ -299,7 +197,7 @@
 		}
 	}
 
-	function check_actions($current) {
+	function check_actions($current) { //controller
 
 		if (!isset($_GET['action'])) return;
 
@@ -308,7 +206,7 @@
 			case 'login':
 				if (isset($_POST['user']) && isset($_POST['pass'])) {
 
-					authenticate_user($_POST['user'], $_POST['pass']);
+					authenticate_user($_POST['user'], $_POST['pass']); //model
 				} break;
 
 			case 'login_failed':
@@ -322,53 +220,25 @@
 
 			case 'edit':
 				if (isset($_POST['title']) && isset($_POST['text'])) {
-					$connection = connect();
+					$connection = connect(); //model
 
 					$article['name'] = $current;
 					$article['title'] = $_POST['title'];
-					$article['text'] = fix_sample_code($_POST['text']);
+					$article['text'] = fix_sample_code($_POST['text']); //utils
 
-					update_article($article);
+					update_article($article); //model
 				} break;
 
 			default: return;
 		}
 	}
 
-	function get_categories() {
-		$connection = connect();
-		$sql = "SELECT name FROM Categories ORDER BY position;";
-		$result = $connection->query($sql);
-
-		$categories = [];
-
-		while ($category = $result->fetch_column()) {
-			$categories[] = $category;
-		}
-
-		return $categories;
+	function msg_success($msg) {
+		set_message($msg, true);
 	}
 
-	function get_articles($category) {
-		$connection = connect();
-		$sql = "SELECT name,title FROM Pages WHERE category = '{$category}' ORDER BY position;";
-		$result = $connection->query($sql);
-
-		$articles = [];
-
-		while ($article = $result->fetch_assoc()) {
-			$articles[] = $article;
-		}
-
-		return $articles;
-	}
-
-	function get_article($article) {
-		$connection = connect();
-		$sql = "SELECT title,text FROM Pages WHERE name = '{$article}';";
-		$result = $connection->query($sql);
-
-		return $result->fetch_assoc();
+	function msg_failure($msg) {
+		set_message($msg, false);
 	}
 
 ?>

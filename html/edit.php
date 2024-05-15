@@ -1,5 +1,4 @@
 <?php
-	require_once("utils.php");
 	require_once("view.php");
 
 	function edit_content() {

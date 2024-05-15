@@ -1,5 +1,5 @@
 <?php
-	require_once("session.php");
+	require_once("utils.php");
 
 	define('DEFAULT_ACTION', 'display.php');
 	define('DEFAULT_CONTENT', 'main');
@@ -76,14 +76,6 @@
 		END;
 
 		print($msg);
-	}
-
-	function msg_success($msg) {
-		set_message($msg, true);
-	}
-
-	function msg_failure($msg) {
-		set_message($msg, false);
 	}
 
 	function set_message($msg, $sx) {
