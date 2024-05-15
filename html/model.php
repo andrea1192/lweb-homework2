@@ -127,7 +127,7 @@
 
 			$_SESSION['user'] = $username;
 
-			msg_success("Login avvenuto con successo.");
+			msg_success("Login avvenuto con successo. Bentornato {$username}!");
 
 		} else {
 			header('Location:'.rewrite_URL('login.php', action:'login_failed'));

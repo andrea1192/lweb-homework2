@@ -44,7 +44,7 @@
 				<form action="<?= rewrite_URL($referrer, action:'login') ?>" method="post">
 					<div id="fields">
 						<label for="name">Nome utente:</label>
-						<input name="user" />
+						<input name="user" autofocus="autofocus" />
 						<label for="pass">Password:</label>
 						<input type="pass" name="pass" />
 					</div>

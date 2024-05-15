@@ -23,7 +23,7 @@
 				msg_failure("Per questa azione devi essere loggato!"); break;
 
 			case 'logout':
-				msg_success("Logout avvenuto."); break;
+				msg_success("Logout avvenuto. A presto!"); break;
 
 			case 'edit':
 				if (isset($_POST['title']) && isset($_POST['text'])) {

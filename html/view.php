@@ -23,7 +23,7 @@
 		$header = <<<END
 			<div class="centered">
 				<div id="title"><a {$home}>Linguaggi per il Web</a></div>
-				<div id="part">{$logged_in}</div>
+				<div id="login">{$logged_in}</div>
 			</div>
 		END;
 
