@@ -3,6 +3,32 @@
 
 	$connection = null;
 
+	function rewrite_URL($URL, $base = null, $action = null) {
+		$URL_path = parse_url($URL, PHP_URL_PATH);
+		$URL_query = parse_url($URL, PHP_URL_QUERY);
+
+		if (isset($base)) {
+			$old_basename = basename($URL_path);
+			$new_basename = $base;
+			$URL_path = str_replace($old_basename, $new_basename, $URL_path);
+		}
+
+		if (isset($action)) {
+
+			if (isset($URL_query)) {
+				parse_str($URL_query, $args);
+			} else {
+				$args = [];
+			}
+
+			$args['action'] = $action;
+
+			$URL_query = http_build_query($args);
+		}
+
+		return "{$URL_path}?{$URL_query}";
+	}
+
 	function get_ext($file) {
 		$pattern = '/([^\/]+)\.(.*)/';
 
@@ -224,7 +250,7 @@
 			msg_success("Login avvenuto con successo.");
 
 		} else {
-			header('Location:'.append_action('login.php', 'login_failed'));
+			header('Location:'.rewrite_URL('login.php', action:'login_failed'));
 
 			exit();
 		}

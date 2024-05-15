@@ -42,7 +42,7 @@
 				?>
 
 				<h1>Login</h1>
-				<form action="<?= get_referrer('login') ?>" method="post">
+				<form action="<?= rewrite_URL($referrer, action:'login') ?>" method="post">
 					<div id="fields">
 						<label for="name">Nome utente:</label>
 						<input name="user" />

@@ -21,7 +21,7 @@
 	check_actions($current);
 
 	if (!get_authorization()) {
-		header('Location:'.append_action('login.php', 'access_denied'));
+		header('Location:'.rewrite_URL('login.php', action:'access_denied'));
 
 		exit();
 	}
@@ -53,7 +53,7 @@
 			</div>
 
 			<div id="main">
-				<form action="<?= get_referrer('edit') ?>" method="post">
+				<form action="<?= rewrite_URL($referrer, 'display.php', 'edit') ?>" method="post">
 					<?php
 						if (!empty($message)) {
 

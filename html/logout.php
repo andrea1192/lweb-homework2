@@ -10,7 +10,7 @@
 	}
 
 	logout();
-	header('Location:'.get_referrer('logout'));
+	header('Location:'.rewrite_URL($referrer, action:'logout'));
 
 	exit();
 
