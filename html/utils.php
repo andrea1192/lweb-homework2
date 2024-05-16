@@ -31,28 +31,21 @@
 		return htmlspecialchars("{$URL_path}?{$URL_query}", ENT_XHTML);
 	}
 
-	function get_ext($file) { //utils
-		$pattern = '/([^\/]+)\.(.*)/';
-
-		preg_match($pattern, $file, $matches);
-
-		return $matches[2] ?? '';
-	}
-
-	function get_UID($file) { //utils
-		$pattern = '/([^\/]+)\.(.*)/';
-
-		preg_match($pattern, $file, $matches);
-
-		return $matches[1] ?? '';
-	}
-
 	function get_title($article) { //utils
 		$pattern = '/<h1>([[:alpha:] ]*)<\/h1>/';
 
 		preg_match($pattern, $article, $matches);
 
 		return $matches[1] ?? '';
+	}
+
+	function generate_UID($title) { //utils
+		$pattern = '/[[:^alnum:]]+/';
+
+		$UID = preg_replace($pattern, '-', $title);
+		$UID = strtolower($UID);
+
+		return $UID;
 	}
 
 	function fix_sample_code($text) { //utils
@@ -82,9 +75,9 @@
 		$text = file_get_contents($file); // Possible SQL injection
 
 		$article = [];
-		$article['name'] = get_UID($file);
 		$article['title'] = get_title($text);
 		$article['text'] = strip_title($text);
+		$article['name'] = generate_UID($article['title']);
 
 		return $article;
 	}

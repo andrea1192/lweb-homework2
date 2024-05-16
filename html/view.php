@@ -2,7 +2,7 @@
 	require_once("controller.php");
 
 	define('DEFAULT_VIEW', 'display.php');
-	define('DEFAULT_CONTENT', 'main');
+	define('DEFAULT_CONTENT', 'home');
 
 	$current = $_GET['page'] ?? DEFAULT_CONTENT;
 
