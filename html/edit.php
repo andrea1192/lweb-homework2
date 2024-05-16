@@ -13,8 +13,8 @@
 
 			<h1><input name="title" value="{$article['title']}" /></h1>
 
-			<div id="edit_fields">
-				<textarea name="text" rows="10" cols="10">{$article['text']}</textarea>
+			<div>
+				<textarea name="text" rows="40" cols="75">{$article['text']}</textarea>
 				<input type="submit" value="Salva" />
 			</div>
 		</form>

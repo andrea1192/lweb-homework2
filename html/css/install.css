@@ -7,10 +7,13 @@ body {
 }
 
 form {
+	position: relative;
+	z-index: 100;
 	width: 350px;
 	margin: 20px auto;
 	border: 1px solid;
 	padding: 20px;
+	background-color: #FFFF;
 }
 
 h1:first-child {
@@ -52,7 +55,7 @@ input[type="submit"][value~="Ripristina"] {
 }
 
 div.mbox {
-	position: absolute;
+	position: fixed;
 	width: 90%;
 	left: 20px;
 	bottom: 50px;

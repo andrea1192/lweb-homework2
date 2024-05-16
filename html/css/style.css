@@ -119,6 +119,7 @@ div.centered {
 }
 
 #footer {
+	position: relative;
 	z-index: 100;
 	min-height: 64px;
 	background-color: rgb(240, 240, 240);

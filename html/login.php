@@ -41,12 +41,12 @@
 				<h1>Login</h1>
 				<form action="<?= rewrite_URL($referrer, action:'login') ?>" method="post">
 					<div id="fields">
-						<label for="name">Nome utente:</label>
-						<input name="user" autofocus="autofocus" />
+						<label for="user">Nome utente:</label>
+						<input id="user" name="user" autofocus="autofocus" />
 						<label for="pass">Password:</label>
-						<input name="pass" type="password" />
+						<input id="pass" name="pass" type="password" />
 					</div>
-					<input type="submit" value="Accedi" />
+					<div><input type="submit" value="Accedi" /></div>
 				</form>
 			</div>
 		</div>
