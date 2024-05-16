@@ -1,6 +1,6 @@
 #main #article-header {
 	position: relative;
-	align-items: center;
+	margin-right: 5px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid var(--borders-color);
 }
@@ -12,10 +12,10 @@
 #main #article-header >a:last-child {
 	display: block;
 	position: absolute;
-	top: 0px;
-	right: 0px;
+	top: -5px;
+	right: -5px;
 	border: 1px solid var(--borders-color);
-	border-radius: 10px;
+	border-radius: 7px;
 	padding: 5px 10px;
 	text-align: center;
 	color: var(--menu-text-color);
@@ -35,6 +35,7 @@
 #main p code,
 #main ul code,
 #main pre code {
+	border-radius: 5px;
 	background-color: rgb(240, 240, 240);
 	font-size: 1.1em;
 }
