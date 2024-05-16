@@ -16,15 +16,15 @@
 
 	function generate_header() {
 		$home = generate_link();
-		$login = '<a href="login.php">Accedi</a>';
-		$logout = '<a href="logout.php">Esci</a>';
+		$login = '<a id="login" href="login.php">Accedi</a>';
+		$logout = '<a id="login" href="logout.php">Esci</a>';
 		$logged_in = get_authorization() ? $logout : $login;
 
 		$header = <<<END
-			<div class="centered">
-				<div id="title"><a {$home}>Linguaggi per il Web</a></div>
-				<div id="login">{$logged_in}</div>
-			</div>
+		<div class="centered">
+			<a id="title" {$home}>Linguaggi per il Web</a>
+			{$logged_in}
+		</div>
 		END;
 
 		print($header);
@@ -69,7 +69,7 @@
 
 		$msg = <<<END
 		<div class="mbox {$class}">
-			$message
+			{$message}
 		</div>
 		END;
 

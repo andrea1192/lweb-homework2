@@ -18,7 +18,7 @@ div.centered {
 	width: 40%;
 	min-width: 768px;
 	margin: 0 auto;
-	padding: 20px;
+	padding: 20px 30px 20px 20px;
 }
 
 #header {
@@ -35,23 +35,16 @@ div.centered {
 	align-items: center;
 }
 
-#header >.centered >div,
-#footer >.centered >div {
-	flex: 1;
-}
-
-#header >.centered >div:last-child,
-#footer >.centered >div:last-child {
-	text-align: right;
-}
-
-#header >.centered >div:last-child >a,
-#footer >.centered >div:last-child >a {
+#header >.centered >:last-child,
+#footer >.centered >:last-child {
+	margin-left: auto;
 	color: var(--menu-text-color);
 }
 
 #title {
 	font-size: 1.2em;
+	color: inherit;
+	text-decoration: none;
 }
 
 #title::before {
@@ -63,11 +56,6 @@ div.centered {
 	font-size: 0.6em;
 	position: relative;
 	top: 0.5em;
-}
-
-#title a {
-	color: inherit;
-	text-decoration: none;
 }
 
 #wrapper {
@@ -87,6 +75,7 @@ div.centered {
 #wrapper >#main {
 	flex: 1;
 	padding: 40px 30px;
+	overflow: auto;
 }
 
 #menu >.sticky {
@@ -137,9 +126,6 @@ div.centered {
 }
 
 div.mbox {
-	position: sticky;
-	top: calc(var(--header-height) + 40px);
-	left: 0;
 	margin-bottom: 15px;
 	border: 1px solid;
 	padding: 20px;
