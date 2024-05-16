@@ -130,7 +130,7 @@
 			msg_success("Login avvenuto con successo. Bentornato {$username}!");
 
 		} else {
-			header('Location:'.rewrite_URL('login.php', action:'login_failed'));
+			header('Location:'.rewrite_URL('login.php', action:'login_failed', encode: false));
 
 			exit();
 		}

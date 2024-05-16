@@ -1,7 +1,7 @@
 <?php
 	require_once("controller.php");
 
-	function rewrite_URL($URL, $view = null, $page = null, $action = null) { //utils
+	function rewrite_URL($URL, $view = null, $page = null, $action = null, $encode = true) { //utils
 		$URL_path = parse_url($URL, PHP_URL_PATH);
 		$URL_query = parse_url($URL, PHP_URL_QUERY);
 
@@ -24,6 +24,9 @@
 
 			$URL_query = http_build_query($args);
 		}
+
+		if (!$encode)
+			return "{$URL_path}?{$URL_query}";
 
 		return htmlspecialchars("{$URL_path}?{$URL_query}", ENT_XHTML);
 	}

@@ -26,7 +26,7 @@
 	check_actions($current);
 
 	if (!get_authorization()) {
-		header('Location:'.rewrite_URL('login.php', action:'access_denied'));
+		header('Location:'.rewrite_URL('login.php', action:'access_denied', encode: false));
 
 		exit();
 	}
