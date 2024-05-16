@@ -6,6 +6,8 @@
 
 	function check_actions($current) { //controller
 
+		if (!tables_exist()) header('Location:install.php');
+
 		if (!isset($_GET['action'])) return;
 
 		switch ($_GET['action']) {

@@ -141,4 +141,16 @@
 			"Errore del database: {$e->getMessage()} ({$e->getFile()}:{$e->getLine()})");
 	}
 
+	function tables_exist() {
+
+		try {
+			select_categories();
+
+		} catch (mysqli_sql_exception $e) {
+			return false;
+		}
+
+		return true;
+	}
+
 ?>
