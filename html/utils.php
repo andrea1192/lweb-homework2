@@ -25,7 +25,7 @@
 			$URL_query = http_build_query($args);
 		}
 
-		return "{$URL_path}?{$URL_query}";
+		return htmlspecialchars("{$URL_path}?{$URL_query}", ENT_XHTML);
 	}
 
 	function get_ext($file) { //utils

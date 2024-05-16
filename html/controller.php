@@ -31,9 +31,9 @@
 
 					$article['name'] = $current;
 					$article['title'] = $_POST['title'];
-					$article['text'] = fix_sample_code($_POST['text']); //utils
+					$article['text'] = $_POST['text'];
 
-					update_article($article); //model
+					save_article($article);
 				} break;
 
 			default: return;
@@ -56,8 +56,24 @@
 		return select_articles($category);
 	}
 
-	function get_article($article) { //model wrapper
-		return select_article($article);
+	function get_article($article, $encode = true) { //model wrapper
+		$article = select_article($article);
+
+		if ($encode) {
+			$article['title'] = htmlspecialchars($article['title'], ENT_XHTML);
+			$article['text'] = htmlspecialchars($article['text'], ENT_XHTML);
+		}
+
+		return $article;
+	}
+
+	function save_article($article) {
+		$article['title'] = htmlspecialchars_decode($article['title'], ENT_XHTML);
+		$article['text'] = htmlspecialchars_decode($article['text'], ENT_XHTML);
+
+		$article['text'] = fix_sample_code($article['text']);
+
+		update_article($article); //model
 	}
 
 ?>
