@@ -6,7 +6,7 @@
 
 	function check_actions($current) { //controller
 
-		if (!tables_exist()) header('Location:install.php');
+		if (!tables_exist()) header('Location:'.rewrite_URL('install.php', action:'db_issues', encode: false));
 
 		if (!isset($_GET['action'])) return;
 

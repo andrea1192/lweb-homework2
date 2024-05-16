@@ -1,5 +1,5 @@
 <?php
-	require_once("view.php");
+	require_once("controller.php");
 
 	$labels = [
 		'db' => [
@@ -69,9 +69,20 @@
 		}
 	}
 
+	if (isset($_GET['action']) && $_GET['action'] == 'db_issues') {
+
+		try {
+			connect();
+			select_categories();
+			select_articles('none');
+
+		} catch (mysqli_sql_exception $e) {
+			log_error($e);
+		}
+	}
+
 ?>
 <?= generate_prolog() ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -100,12 +111,12 @@
 		</form>
 
 		<?php
-			if(isset($_POST['action'])) {
+			if(isset($_POST['action']) || isset($_GET['action'])) {
 
 				generate_message();
 			}
 		?>
 
 	</body>
-	
+
 </html>
