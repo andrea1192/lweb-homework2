@@ -30,6 +30,18 @@
 		print($header);
 	}
 
+	function generate_footer() {
+
+		$footer = <<<END
+		<div class="centered">
+			<div>Andrea Ippoliti - matricola 1496769</div>
+			<div><a href="#top">Torna su</a></div>
+		</div>
+		END;
+
+		print($footer);
+	}
+
 	function generate_menu() {
 
 		foreach (get_categories() as $category) {

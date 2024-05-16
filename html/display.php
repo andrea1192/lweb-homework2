@@ -56,10 +56,7 @@
 			</div>
 		</div>
 		<div id="footer">
-			<div class="centered">
-				<div>Andrea Ippoliti - matricola 1496769</div>
-				<div><a href="#top">Torna su</a></div>
-			</div>
+			<?php generate_footer() ?>
 		</div>
 	</body>
 	
