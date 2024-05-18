@@ -10,7 +10,4 @@
 
 	logout();
 	header('Location:'.rewrite_URL($referrer, action:'logout', encode: false));
-
-	exit();
-
 ?>

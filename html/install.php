@@ -1,5 +1,5 @@
 <?php
-	require_once("controller.php");
+	require_once("install-utils.php");
 
 	$labels = [
 		'db' => [
@@ -57,8 +57,7 @@
 				$user = $_POST[$labels['user']['Username']];
 				$pass = $_POST[$labels['user']['Password']];
 
-				install();
-				create_user($user, $pass);
+				install($user, $pass);
 				break;
 
 			case 'Ripristina':
@@ -73,10 +72,10 @@
 
 		try {
 			connect();
-			select_categories();
-			select_articles('none');
+			if (!database_exists()) throw new Exception("Il database non è stato creato.");
+			if (!tables_exist()) throw new Exception("Le tabelle non sono state create.");
 
-		} catch (mysqli_sql_exception $e) {
+		} catch (Exception $e) {
 			log_error($e);
 		}
 	}

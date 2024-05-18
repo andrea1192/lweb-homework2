@@ -4,11 +4,29 @@
 	require_once("model.php");
 	require_once("view.php");
 
+	function check_database() {
+		try {
+			connect();
+
+			if (!database_exists() || !tables_exist()) throw new Exception();
+
+		} catch (Exception $e) {
+			header('Location:'.rewrite_URL('install.php', action:'db_issues', encode: false));
+		}
+	}
+
 	function check_actions($current) { //controller
 
-		if (!tables_exist()) header('Location:'.rewrite_URL('install.php', action:'db_issues', encode: false));
+		try {
+			get_article($current);
 
-		if (!isset($_GET['action'])) return;
+		} catch (Exception $e) {
+			msg_failure("Articolo non trovato: \"{$current}\"");
+			return;
+		}
+
+		if (!isset($_GET['action']))
+			return;
 
 		switch ($_GET['action']) {
 
@@ -29,13 +47,14 @@
 
 			case 'edit':
 				if (isset($_POST['title']) && isset($_POST['text'])) {
-					$connection = connect(); //model
 
 					$article['name'] = $current;
 					$article['title'] = $_POST['title'];
 					$article['text'] = $_POST['text'];
 
 					save_article($article);
+
+					msg_success("Articolo aggiornato con successo.");
 				} break;
 
 			default: return;
@@ -59,7 +78,9 @@
 	}
 
 	function get_article($article, $encode = true) { //model wrapper
-		$article = select_article($article);
+
+		if (empty($article = select_article($article)))
+			throw new Exception();
 
 		if ($encode) {
 			$article['title'] = htmlspecialchars($article['title'], ENT_XHTML);

@@ -4,8 +4,13 @@
 	function print_content() {
 		global $current;
 
-		$article = get_article($current, encode: false);
-		$edit_link = generate_link(view:'edit.php', page:$current);
+		try {
+			$article = get_article($current, encode: false);
+			$edit_link = generate_link(view:'edit.php', page:$current);
+
+		} catch (Exception $e) {
+			return;
+		}
 
 		$content = <<<END
 		<div id="article-header">
@@ -18,6 +23,7 @@
 		print($content);
 	}
 
+	check_database();
 	check_actions($current);
 ?>
 <?= generate_prolog() ?>

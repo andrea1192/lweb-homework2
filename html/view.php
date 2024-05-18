@@ -10,7 +10,6 @@
 	$success = true;
 
 	function generate_prolog() {
-
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 	}
 
@@ -31,7 +30,6 @@
 	}
 
 	function generate_footer() {
-
 		$footer = <<<END
 		<div class="centered">
 			<div>Andrea Ippoliti - matricola 1496769</div>

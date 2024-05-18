@@ -1,6 +1,7 @@
 <?php
 	require_once("view.php");
 
+	check_database();
 	check_actions($current);
 ?>
 <?= generate_prolog() ?>

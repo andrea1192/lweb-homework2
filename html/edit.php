@@ -5,8 +5,13 @@
 		global $current;
 		global $referrer;
 
-		$form_action = rewrite_URL($referrer, view:'display.php', action:'edit');
-		$article = get_article($current);
+		try {
+			$form_action = rewrite_URL($referrer, view:'display.php', action:'edit');
+			$article = get_article($current);
+
+		} catch (Exception $e) {
+			return;
+		}
 
 		$edit_UI = <<<END
 		<form action="{$form_action}" method="post">
@@ -23,6 +28,7 @@
 		print($edit_UI);
 	}
 
+	check_database();
 	check_actions($current);
 
 	if (!get_authorization()) {

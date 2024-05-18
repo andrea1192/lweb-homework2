@@ -18,8 +18,7 @@
 	}
 
 	function get_authorization() {
-
-		return (isset($_SESSION['user'])) ? true : false;
+		return isset($_SESSION['user']);
 	}
 
 ?>
