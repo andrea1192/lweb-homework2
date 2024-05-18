@@ -74,7 +74,12 @@
 		} 
 
 		if (!isset($errors)) {
-			msg_success("Database \"{$settings['db_name']}\" inizializzato.");
+			$msg = <<<END
+			<p>Database "{$settings['db_name']}" inizializzato.</p>
+			<p><a href="display.php">Vai al sito &gt;&gt;&gt;</a></p>
+			END;
+
+			msg_success($msg);
 		}
 	}
 
@@ -93,7 +98,12 @@
 		} 
 
 		if (!isset($errors)) {
-			msg_success("Database \"{$settings['db_name']}\" ripristinato.");
+			$msg = <<<END
+			<p>Database "{$settings['db_name']}" ripristinato.</p>
+			<p>Ora &egrave; possibile ripetere l'installazione.</p>
+			END;
+
+			msg_success($msg);
 		}
 	}
 

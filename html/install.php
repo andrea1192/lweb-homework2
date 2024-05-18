@@ -71,9 +71,8 @@
 	if (isset($_GET['action']) && $_GET['action'] == 'db_issues') {
 
 		try {
-			connect();
-			if (!database_exists()) throw new Exception("Il database non è stato creato.");
-			if (!tables_exist()) throw new Exception("Le tabelle non sono state create.");
+			if (!database_exists()) throw new Exception('Database non trovato');
+			if (!tables_exist()) throw new Exception('Tabelle mancanti');
 
 		} catch (Exception $e) {
 			log_error($e);
@@ -110,7 +109,7 @@
 		</form>
 
 		<?php
-			if(isset($_POST['action']) || isset($_GET['action'])) {
+			if(isset($_REQUEST['action'])) {
 
 				generate_message();
 			}

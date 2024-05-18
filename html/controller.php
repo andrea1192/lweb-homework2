@@ -6,8 +6,6 @@
 
 	function check_database() {
 		try {
-			connect();
-
 			if (!database_exists() || !tables_exist()) throw new Exception();
 
 		} catch (Exception $e) {
@@ -83,7 +81,6 @@
 			throw new Exception();
 
 		if ($encode) {
-			$article['title'] = htmlspecialchars($article['title'], ENT_XHTML);
 			$article['text'] = htmlspecialchars($article['text'], ENT_XHTML);
 		}
 
@@ -91,9 +88,8 @@
 	}
 
 	function save_article($article) {
-		$article['title'] = htmlspecialchars_decode($article['title'], ENT_XHTML);
+		$article['title'] = htmlspecialchars($article['title'], ENT_QUOTES | ENT_XHTML);
 		$article['text'] = htmlspecialchars_decode($article['text'], ENT_XHTML);
-
 		$article['text'] = fix_sample_code($article['text']);
 
 		update_article($article); //model
