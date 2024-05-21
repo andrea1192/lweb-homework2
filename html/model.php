@@ -135,7 +135,7 @@
 		$db_name = $settings['db_name'];
 
 		$connection = new mysqli($db_host, $db_user, $db_pass);
-		$sql = "SHOW DATABASES WHERE Database = '{$db_name}'";
+		$sql = "SHOW DATABASES WHERE `Database` = '{$db_name}'";
 		$result = $connection->query($sql);
 
 		return $result->num_rows;
