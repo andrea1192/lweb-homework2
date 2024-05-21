@@ -4,5 +4,4 @@
 
 # Secrets
 .env
-connection.php
 test.php
