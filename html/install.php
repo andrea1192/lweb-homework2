@@ -37,7 +37,7 @@
 
 		foreach ($labels[$group] as $label => $name) {
 			$disable = $enabled ? '' : 'disabled="disabled"';
-			$value = $settings[$name];
+			$value = $_POST[$name] ?? $settings[$name];
 			
 			$html = <<<END
 			<label>{$label}: 
